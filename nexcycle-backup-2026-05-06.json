@@ -1,0 +1,1519 @@
+{
+  "brands": [
+    {
+      "id": "b_bywura",
+      "name": "BYWURA",
+      "notes": "Own label"
+    },
+    {
+      "id": "b_eponymous",
+      "name": "EPONYMOUS",
+      "notes": ""
+    },
+    {
+      "id": "b_piecesombre",
+      "name": "Piece Sombre",
+      "notes": ""
+    },
+    {
+      "id": "b_chaos",
+      "name": "Chaos Fashion Project",
+      "notes": ""
+    },
+    {
+      "id": "b_timis",
+      "name": "Timis Wedding",
+      "notes": ""
+    },
+    {
+      "id": "b_thomas",
+      "name": "Thomas Chase",
+      "notes": ""
+    },
+    {
+      "id": "b_amaechinna",
+      "name": "Amaechinna Iwuh",
+      "notes": ""
+    },
+    {
+      "id": "b_london",
+      "name": "London Chase Chef",
+      "notes": ""
+    },
+    {
+      "id": "b_triple",
+      "name": "Triple Thread",
+      "notes": ""
+    },
+    {
+      "id": "b_garm",
+      "name": "Garm Spot",
+      "notes": ""
+    },
+    {
+      "id": "b_offering",
+      "name": "Offering",
+      "notes": ""
+    },
+    {
+      "id": "b_wunmii",
+      "name": "WUNMII",
+      "notes": ""
+    },
+    {
+      "id": "b_upcycled",
+      "name": "Upcycled by NexCycle",
+      "notes": "In-house"
+    }
+  ],
+  "tailors": [
+    "Rafat",
+    "Razak",
+    "Moyo",
+    "Opeye",
+    "New Tailor",
+    "All"
+  ],
+  "staff": [
+    {
+      "id": "s_rafat",
+      "name": "Rafat",
+      "role": "Tailor / Studio Supervisor",
+      "active": true,
+      "joined": "2025-01-01",
+      "departed": ""
+    },
+    {
+      "id": "s_razak",
+      "name": "Razak",
+      "role": "Tailor",
+      "active": true,
+      "joined": "2025-01-01",
+      "departed": ""
+    },
+    {
+      "id": "s_moyo",
+      "name": "Moyo",
+      "role": "Assistant Tailor",
+      "active": true,
+      "joined": "2026-03-16",
+      "departed": ""
+    },
+    {
+      "id": "s_moub33h6btai",
+      "name": "All",
+      "role": "Tailor",
+      "active": true,
+      "joined": "2026-05-06",
+      "departed": ""
+    }
+  ],
+  "jobs": [
+    {
+      "id": "j_b898aeqd",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Revenge Dress (Sample)",
+      "start": "2026-01-14",
+      "end": "2026-01-15",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "Client wants to make another sample",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_al3ne2nc",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Tinkerbell Dress (Sample)",
+      "start": "2026-01-19",
+      "end": "2026-01-20",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "Have to sew final fabric sample.",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_dvynx4oe",
+      "brand": "b_chaos",
+      "type": "sample",
+      "collection": "1",
+      "task": "Trousers, Bucket Hat and Satin Scarf (Sample)",
+      "start": "2026-01-20",
+      "end": "2026-01-21",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "1",
+      "status": "half",
+      "notes": "Trousers complete",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_zmjmvnvb",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Tinkerbell Dress (Final Sample)",
+      "start": "2026-01-29",
+      "end": "2026-01-29",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "Sew with final fabric",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_5mcao4l4",
+      "brand": "b_eponymous",
+      "type": "production",
+      "collection": "1",
+      "task": "Production of the Tinkerbell Dress",
+      "start": "2026-05-18",
+      "end": "2026-06-18",
+      "realistic": "",
+      "tailor": "All",
+      "units": "10",
+      "status": "not-scheduled",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_fofd84o8",
+      "brand": "b_eponymous",
+      "type": "production",
+      "collection": "1",
+      "task": "Production of the Birthday Dress",
+      "start": "2026-05-11",
+      "end": "2026-06-11",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "10",
+      "status": "not-scheduled",
+      "notes": "Started the fabric manipulation",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_vsbejzd5",
+      "brand": "b_thomas",
+      "type": "sample",
+      "collection": "-",
+      "task": "x2 Shirt Samples",
+      "start": "2026-01-26",
+      "end": "2026-01-27",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "3",
+      "status": "completed",
+      "notes": "Only cut the calico",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_ghtpxlgl",
+      "brand": "b_eponymous",
+      "type": "production",
+      "collection": "1",
+      "task": "Production of the Birthday Dress and Sunset Dress",
+      "start": "",
+      "end": "",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "11",
+      "status": "not-scheduled",
+      "notes": "Fabric manipulation of chiffon",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_h8469ryo",
+      "brand": "b_amaechinna",
+      "type": "sample",
+      "collection": "1",
+      "task": "Batwing top and skirt set (sample)",
+      "start": "2026-02-04",
+      "end": "2026-02-04",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "1 (set)",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_nxipb2x4",
+      "brand": "b_piecesombre",
+      "type": "sample",
+      "collection": "1",
+      "task": "Upcycled Denim Jorts and Upcycled Denim Dickies",
+      "start": "2026-02-03",
+      "end": "2026-02-03",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "1 each",
+      "status": "completed",
+      "notes": "Have to collect the embroidery from Bayo and buy jeans for dickies",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_t351rxgw",
+      "brand": "b_piecesombre",
+      "type": "sample",
+      "collection": "1",
+      "task": "Create oversized bag",
+      "start": "2026-02-12",
+      "end": "2026-02-12",
+      "realistic": "",
+      "tailor": "Opeye",
+      "units": "",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_52xkotyw",
+      "brand": "b_thomas",
+      "type": "sample",
+      "collection": "-",
+      "task": "x2 Shirt Samples",
+      "start": "",
+      "end": "2026-02-05",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "2",
+      "status": "not-complete",
+      "notes": "Add pockets, buttons and logo to shirts",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_1azjpn38",
+      "brand": "b_eponymous",
+      "type": "production",
+      "collection": "1",
+      "task": "Production of the Revenge Dress and Tinkerbell Dress",
+      "start": "",
+      "end": "",
+      "realistic": "",
+      "tailor": "Rafat and Razak",
+      "units": "11",
+      "status": "not-scheduled",
+      "notes": "Razak starts then Rafat from the 3rd and New Tailor finishing off Thursday 13th",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_bv8qf2az",
+      "brand": "b_piecesombre",
+      "type": "sample",
+      "collection": "1",
+      "task": "Upcycled Denim Jorts with dickies side pocket",
+      "start": "2026-02-16",
+      "end": "2026-02-23",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "2",
+      "status": "completed",
+      "notes": "One in black and one in blue",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_16xnu03z",
+      "brand": "b_chaos",
+      "type": "sample",
+      "collection": "1",
+      "task": "New Trousers (Sample)",
+      "start": "2026-02-17",
+      "end": "2026-02-17",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "1",
+      "status": "not-complete",
+      "notes": "My size as sample fit",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_5d6rw4tc",
+      "brand": "b_chaos",
+      "type": "sample",
+      "collection": "1",
+      "task": "Bucket Hat",
+      "start": "2026-02-19",
+      "end": "2026-02-19",
+      "realistic": "",
+      "tailor": "New Tailor",
+      "units": "1",
+      "status": "completed",
+      "notes": "On going",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_0zz0ejja",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Sunset Set",
+      "start": "2026-03-02",
+      "end": "2026-03-05",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_7sar7fyu",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Birthday Dress",
+      "start": "",
+      "end": "2026-03-09",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_u9769ntj",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Tinkerbell Dress",
+      "start": "",
+      "end": "2026-03-09",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_yfz1ehd6",
+      "brand": "b_amaechinna",
+      "type": "sample",
+      "collection": "1",
+      "task": "Batwing top and skirt set",
+      "start": "2026-03-09",
+      "end": "2026-03-09",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "1",
+      "status": "completed",
+      "notes": "Need to add fringe beading to the sample",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_aabrn0es",
+      "brand": "b_triple",
+      "type": "sample",
+      "collection": "",
+      "task": "Sample",
+      "start": "2026-03-09",
+      "end": "2026-03-11",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "1",
+      "status": "completed",
+      "notes": "Sample is complete.",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_ufhx0po4",
+      "brand": "b_london",
+      "type": "sample",
+      "collection": "-",
+      "task": "x5 Samples",
+      "start": "",
+      "end": "2026-03-23",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "5",
+      "status": "half",
+      "notes": "2 jacket samples complete and 1 trouser sample.",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_f3qhysn5",
+      "brand": "b_eponymous",
+      "type": "sample",
+      "collection": "1",
+      "task": "Westeria Dress",
+      "start": "2026-03-11",
+      "end": "2026-03-17",
+      "realistic": "",
+      "tailor": "Moyo",
+      "units": "1",
+      "status": "half",
+      "notes": "1st Sample is completed, now we need to make another one out of lace",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_2q0vwimj",
+      "brand": "b_piecesombre",
+      "type": "sample",
+      "collection": "1",
+      "task": "x2 Jorts",
+      "start": "2026-03-16",
+      "end": "",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "2",
+      "status": "completed",
+      "notes": "Denim has been bought",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_5ejosv1q",
+      "brand": "b_garm",
+      "type": "sample",
+      "collection": "-",
+      "task": "Baby Tee Samples",
+      "start": "2026-03-23",
+      "end": "",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "3",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_t6h93p20",
+      "brand": "b_garm",
+      "type": "production",
+      "collection": "1",
+      "task": "Baby Tee (Production)",
+      "start": "2026-03-30",
+      "end": "",
+      "realistic": "",
+      "tailor": "Razak",
+      "units": "20",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_1fmiizxn",
+      "brand": "b_upcycled",
+      "type": "sample",
+      "collection": "1",
+      "task": "Samples for workshop",
+      "start": "2026-03-31",
+      "end": "",
+      "realistic": "",
+      "tailor": "",
+      "units": "",
+      "status": "completed",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_bb0pc52f",
+      "brand": "b_chaos",
+      "type": "sample",
+      "collection": "1",
+      "task": "Trousers (Sample)",
+      "start": "2026-03-17",
+      "end": "",
+      "realistic": "",
+      "tailor": "All",
+      "units": "1",
+      "status": "half",
+      "notes": "On going project.",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    },
+    {
+      "id": "j_ktfibr0v",
+      "brand": "b_eponymous",
+      "type": "production",
+      "collection": "1",
+      "task": "Production of the Tinkerbell Dress",
+      "start": "2026-05-11",
+      "end": "2026-06-11",
+      "realistic": "",
+      "tailor": "Rafat",
+      "units": "10",
+      "status": "not-complete",
+      "notes": "",
+      "priority": "i",
+      "fabricMain": "",
+      "fabricLining": "",
+      "construction": "",
+      "trims": "",
+      "done": "",
+      "createdAt": "2026-05-06T15:29:12.191Z"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "a_958twymb",
+      "staffId": "s_rafat",
+      "date": "2026-01-13",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_qcanf5ps",
+      "staffId": "s_razak",
+      "date": "2026-01-13",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_plwxv58t",
+      "staffId": "s_rafat",
+      "date": "2026-01-14",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_2zkehx9j",
+      "staffId": "s_razak",
+      "date": "2026-01-14",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_g9b4zr8v",
+      "staffId": "s_rafat",
+      "date": "2026-01-15",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_jcajc8vn",
+      "staffId": "s_razak",
+      "date": "2026-01-15",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_382tkh06",
+      "staffId": "s_rafat",
+      "date": "2026-01-19",
+      "status": "late",
+      "actualStart": "09:45",
+      "notes": ""
+    },
+    {
+      "id": "a_0oyikq05",
+      "staffId": "s_razak",
+      "date": "2026-01-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_trkcumbc",
+      "staffId": "s_rafat",
+      "date": "2026-01-20",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_7krfyln9",
+      "staffId": "s_razak",
+      "date": "2026-01-20",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_6jdi05kf",
+      "staffId": "s_rafat",
+      "date": "2026-01-21",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_hgaoui20",
+      "staffId": "s_razak",
+      "date": "2026-01-21",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_1ui6owoz",
+      "staffId": "s_rafat",
+      "date": "2026-01-22",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_famfxh3i",
+      "staffId": "s_razak",
+      "date": "2026-01-22",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_l39vdgxq",
+      "staffId": "s_rafat",
+      "date": "2026-01-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_brjwlrif",
+      "staffId": "s_razak",
+      "date": "2026-01-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_4t5j944f",
+      "staffId": "s_rafat",
+      "date": "2026-01-27",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_7zp9m49u",
+      "staffId": "s_razak",
+      "date": "2026-01-27",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_oa78ltf7",
+      "staffId": "s_rafat",
+      "date": "2026-01-28",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_97j0xd7o",
+      "staffId": "s_razak",
+      "date": "2026-01-28",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_rysto98f",
+      "staffId": "s_rafat",
+      "date": "2026-01-29",
+      "status": "absent",
+      "actualStart": "",
+      "notes": "No show"
+    },
+    {
+      "id": "a_18005jde",
+      "staffId": "s_razak",
+      "date": "2026-01-29",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_gl6nanvk",
+      "staffId": "s_razak",
+      "date": "2026-02-02",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_odusyz2f",
+      "staffId": "s_rafat",
+      "date": "2026-02-02",
+      "status": "late",
+      "actualStart": "10:30",
+      "notes": ""
+    },
+    {
+      "id": "a_cfem1fwz",
+      "staffId": "s_razak",
+      "date": "2026-02-03",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_ryd70vqc",
+      "staffId": "s_rafat",
+      "date": "2026-02-03",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_s5qd6tfb",
+      "staffId": "s_razak",
+      "date": "2026-02-04",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_k609ntqg",
+      "staffId": "s_rafat",
+      "date": "2026-02-04",
+      "status": "late",
+      "actualStart": "09:45",
+      "notes": ""
+    },
+    {
+      "id": "a_yzrqr2kk",
+      "staffId": "s_razak",
+      "date": "2026-02-05",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_dx9zgge9",
+      "staffId": "s_rafat",
+      "date": "2026-02-05",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_d6oqtg1g",
+      "staffId": "s_razak",
+      "date": "2026-02-09",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_bmtjx3m3",
+      "staffId": "s_rafat",
+      "date": "2026-02-09",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_sgwp13ig",
+      "staffId": "s_razak",
+      "date": "2026-02-10",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_x5g4cu3o",
+      "staffId": "s_rafat",
+      "date": "2026-02-10",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_nmhjuyo1",
+      "staffId": "s_razak",
+      "date": "2026-02-11",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_3lzm7n3q",
+      "staffId": "s_rafat",
+      "date": "2026-02-11",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_o7ygfaao",
+      "staffId": "s_razak",
+      "date": "2026-02-12",
+      "status": "absent",
+      "actualStart": "",
+      "notes": "No show"
+    },
+    {
+      "id": "a_a75yrgh4",
+      "staffId": "s_rafat",
+      "date": "2026-02-12",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_0nk8vzy8",
+      "staffId": "s_razak",
+      "date": "2026-02-16",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_12tvt2b0",
+      "staffId": "s_rafat",
+      "date": "2026-02-16",
+      "status": "absent",
+      "actualStart": "",
+      "notes": "No show"
+    },
+    {
+      "id": "a_7pvdwz2t",
+      "staffId": "s_razak",
+      "date": "2026-02-17",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_i9234704",
+      "staffId": "s_rafat",
+      "date": "2026-02-17",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_zi9hzty7",
+      "staffId": "s_razak",
+      "date": "2026-02-18",
+      "status": "absent",
+      "actualStart": "",
+      "notes": "No show"
+    },
+    {
+      "id": "a_us0kkdkp",
+      "staffId": "s_rafat",
+      "date": "2026-02-18",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_a8e6jsji",
+      "staffId": "s_razak",
+      "date": "2026-02-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_q0a64h1m",
+      "staffId": "s_rafat",
+      "date": "2026-02-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_pzdimlcl",
+      "staffId": "s_razak",
+      "date": "2026-02-23",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_z3o9d3ml",
+      "staffId": "s_rafat",
+      "date": "2026-02-23",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_8t89k8lh",
+      "staffId": "s_razak",
+      "date": "2026-02-24",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_6uz85e3v",
+      "staffId": "s_rafat",
+      "date": "2026-02-24",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_9fg1hndz",
+      "staffId": "s_razak",
+      "date": "2026-02-25",
+      "status": "absent",
+      "actualStart": "",
+      "notes": "No show"
+    },
+    {
+      "id": "a_vbfq6pse",
+      "staffId": "s_rafat",
+      "date": "2026-02-25",
+      "status": "late",
+      "actualStart": "13:00",
+      "notes": "1 hour extra break"
+    },
+    {
+      "id": "a_avbxn0ip",
+      "staffId": "s_razak",
+      "date": "2026-02-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_lh6u9jho",
+      "staffId": "s_rafat",
+      "date": "2026-02-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_uj3l0756",
+      "staffId": "s_razak",
+      "date": "2026-03-02",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_8uwocl7s",
+      "staffId": "s_rafat",
+      "date": "2026-03-02",
+      "status": "late",
+      "actualStart": "09:30",
+      "notes": ""
+    },
+    {
+      "id": "a_hvjagfkt",
+      "staffId": "s_razak",
+      "date": "2026-03-03",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_l0arbrrb",
+      "staffId": "s_rafat",
+      "date": "2026-03-03",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_das9zfoe",
+      "staffId": "s_razak",
+      "date": "2026-03-04",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_pclsc8c0",
+      "staffId": "s_rafat",
+      "date": "2026-03-04",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_3p6k3qjk",
+      "staffId": "s_razak",
+      "date": "2026-03-05",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_klz5x0nf",
+      "staffId": "s_rafat",
+      "date": "2026-03-05",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_u2zuqkav",
+      "staffId": "s_razak",
+      "date": "2026-03-09",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_9e0qhcj6",
+      "staffId": "s_rafat",
+      "date": "2026-03-09",
+      "status": "late",
+      "actualStart": "09:30",
+      "notes": ""
+    },
+    {
+      "id": "a_pdaiugtx",
+      "staffId": "s_razak",
+      "date": "2026-03-10",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_ia76ytik",
+      "staffId": "s_rafat",
+      "date": "2026-03-10",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_4cd9xmxc",
+      "staffId": "s_razak",
+      "date": "2026-03-11",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_zfzd4s78",
+      "staffId": "s_rafat",
+      "date": "2026-03-11",
+      "status": "late",
+      "actualStart": "10:30",
+      "notes": "15 mins extra break"
+    },
+    {
+      "id": "a_yvouj5ld",
+      "staffId": "s_razak",
+      "date": "2026-03-12",
+      "status": "absent",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_w1f63zgw",
+      "staffId": "s_rafat",
+      "date": "2026-03-12",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_mu1i172q",
+      "staffId": "s_razak",
+      "date": "2026-03-16",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_myo2fax6",
+      "staffId": "s_rafat",
+      "date": "2026-03-16",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_jllmtypc",
+      "staffId": "s_moyo",
+      "date": "2026-03-16",
+      "status": "present",
+      "actualStart": "",
+      "notes": "First day"
+    },
+    {
+      "id": "a_porlcicp",
+      "staffId": "s_razak",
+      "date": "2026-03-17",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_vmkn9jh4",
+      "staffId": "s_rafat",
+      "date": "2026-03-17",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_vd8li17i",
+      "staffId": "s_moyo",
+      "date": "2026-03-17",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_np0ax6cl",
+      "staffId": "s_razak",
+      "date": "2026-03-18",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_rouu1vml",
+      "staffId": "s_rafat",
+      "date": "2026-03-18",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_3ch2f6xw",
+      "staffId": "s_moyo",
+      "date": "2026-03-18",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_0pa7xb2j",
+      "staffId": "s_razak",
+      "date": "2026-03-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_pyycohlr",
+      "staffId": "s_rafat",
+      "date": "2026-03-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_6mngzd7i",
+      "staffId": "s_moyo",
+      "date": "2026-03-19",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_np6sy1vp",
+      "staffId": "s_razak",
+      "date": "2026-03-23",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_x40i2892",
+      "staffId": "s_rafat",
+      "date": "2026-03-23",
+      "status": "absent",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_b8cyj5nh",
+      "staffId": "s_moyo",
+      "date": "2026-03-23",
+      "status": "late",
+      "actualStart": "09:30",
+      "notes": ""
+    },
+    {
+      "id": "a_tbjsgcdk",
+      "staffId": "s_razak",
+      "date": "2026-03-24",
+      "status": "late",
+      "actualStart": "07:00",
+      "notes": ""
+    },
+    {
+      "id": "a_2sqemjm6",
+      "staffId": "s_rafat",
+      "date": "2026-03-24",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_jo5wtwy5",
+      "staffId": "s_moyo",
+      "date": "2026-03-24",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_1zjo2g8x",
+      "staffId": "s_razak",
+      "date": "2026-03-25",
+      "status": "absent",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_d3qgjmfh",
+      "staffId": "s_razak",
+      "date": "2026-03-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_ff5vdshu",
+      "staffId": "s_rafat",
+      "date": "2026-03-26",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_heq9kolz",
+      "staffId": "s_razak",
+      "date": "2026-03-29",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_rrnjtrbu",
+      "staffId": "s_rafat",
+      "date": "2026-03-29",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_68kc5eqh",
+      "staffId": "s_moyo",
+      "date": "2026-03-29",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_dpo9kfsa",
+      "staffId": "s_razak",
+      "date": "2026-03-30",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_umdnfhy0",
+      "staffId": "s_rafat",
+      "date": "2026-03-30",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    },
+    {
+      "id": "a_b43b0m3e",
+      "staffId": "s_moyo",
+      "date": "2026-03-30",
+      "status": "present",
+      "actualStart": "",
+      "notes": ""
+    }
+  ],
+  "filters": {
+    "tailor": "",
+    "brand": "",
+    "type": "",
+    "month": ""
+  },
+  "studio": {
+    "name": "NexCycle · BY.WURA",
+    "supervisor": "Rafat",
+    "supervisorRole": "Studio Supervisor",
+    "scheduledStart": "09:00",
+    "scheduledEnd": "16:30"
+  },
+  "attendanceView": {
+    "mode": "daily",
+    "date": "2026-05-06",
+    "month": ""
+  },
+  "calendarAnchor": "2026-01-12"
+}
