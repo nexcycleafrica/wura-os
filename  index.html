@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — Production, Tech Packs & Attendance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6; --paper-2: #ebe3d4; --ink: #1a1612; --ink-soft: #4a403a; --ink-mute: #8a7f75;
+    --line: #d4c9b6; --accent: #b8381f; --accent-soft: #e8c8c0;
+    --green: #3d5a3a; --green-soft: #d4e0cc; --amber: #b8841f; --amber-soft: #f0e0b8;
+    --blue-soft: #d0d8e4; --red-soft: #ecd0c8;
+    --shadow: 0 1px 0 rgba(26,22,18,0.04), 0 1px 2px rgba(26,22,18,0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; background-image: radial-gradient(circle at 20% 10%, rgba(184,56,31,0.04) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(61,90,58,0.03) 0%, transparent 40%); }
+  .container { max-width: 1500px; margin: 0 auto; padding: 32px 48px 120px; }
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid var(--ink); margin-bottom: 32px; }
+  .masthead-left h1 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 56px; line-height: 1; letter-spacing: -0.02em; font-style: italic; }
+  .masthead-left .sub { font-family: 'Fraunces', serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-mute); margin-top: 12px; }
+  .masthead-right { text-align: right; font-family: 'Fraunces', serif; font-size: 13px; color: var(--ink-soft); }
+  .masthead-right .date { font-size: 16px; font-style: italic; }
+  .masthead-right .stats { margin-top: 8px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); }
+  .nav { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .nav-btn { background: none; border: none; padding: 14px 20px; font-family: inherit; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; }
+  .nav-btn:hover { color: var(--ink); }
+  .nav-btn.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
+  .nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; padding-right: 4px; }
+  .btn { padding: 9px 18px; font-family: inherit; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; transition: all 0.15s; }
+  .btn:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+  .filters-bar { display: flex; gap: 20px; align-items: center; margin-bottom: 24px; padding: 14px 20px; background: var(--paper-2); border: 1px solid var(--line); flex-wrap: wrap; }
+  .filter-group { display: flex; align-items: center; gap: 8px; }
+  .filter-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .filter-select { padding: 6px 10px; border: 1px solid var(--line); background: var(--paper); font-family: inherit; font-size: 12px; color: var(--ink); }
+  .filter-reset { margin-left: auto; background: none; border: none; color: var(--accent); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+  .filter-reset:hover { text-decoration: underline; }
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  .board-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: 32px; font-style: italic; font-weight: 400; }
+  .kanban { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .status-col { background: var(--paper-2); border: 1px solid var(--line); padding: 14px; min-height: 300px; }
+  .status-col.not-complete { background: #f5e4df; }
+  .status-col.paused { background: #e0e8f0; }
+  .status-col.half { background: #f5ead0; }
+  .status-col.completed { background: var(--green-soft); }
+  .status-col.not-scheduled { background: #e8e0e8; }
+  .status-col-header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .status-col-title { font-family: 'Fraunces', serif; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  .status-col-count { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--ink-mute); }
+  .job-card { background: var(--paper); border: 1px solid var(--line); padding: 11px 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow); font-size: 13px; position: relative; }
+  .job-card:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .job-brand { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; margin-bottom: 2px; color: var(--accent); }
+  .job-task { font-size: 12px; color: var(--ink); margin-bottom: 8px; line-height: 1.35; }
+  .job-meta-row { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); padding-top: 6px; border-top: 1px dashed var(--line); gap: 4px; }
+  .job-tailor { font-weight: 500; color: var(--ink-soft); }
+  .job-overdue { color: var(--accent); font-weight: 500; }
+  .type-tag { display: inline-block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--line); margin-bottom: 6px; font-weight: 500; }
+  .type-tag.sample { background: var(--blue-soft); color: #2a3a54; border-color: #2a3a54; }
+  .type-tag.production { background: var(--amber-soft); color: var(--amber); border-color: var(--amber); }
+  .type-tag.custom { background: #f0d8e0; color: #7a3a5a; border-color: #7a3a5a; }
+  .priority-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); border: 1px solid var(--line); margin-bottom: 32px; }
+  .quadrant { background: var(--paper); padding: 22px 26px; min-height: 180px; }
+  .quadrant-header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .quadrant-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; }
+  .quadrant-caption { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); }
+  .quadrant.urgent-important .quadrant-title::before { content: "I.  "; color: var(--accent); }
+  .quadrant.important .quadrant-title::before { content: "II.  "; color: var(--ink-mute); }
+  .quadrant.urgent .quadrant-title::before { content: "III.  "; color: var(--ink-mute); }
+  .quadrant.neither .quadrant-title::before { content: "IV.  "; color: var(--ink-mute); }
+  .task-item { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); align-items: center; cursor: pointer; }
+  .task-item:hover { background: var(--paper-2); padding-left: 8px; padding-right: 8px; margin: 0 -8px; }
+  .task-item:last-child { border-bottom: none; }
+  .task-label { font-size: 13px; line-height: 1.4; }
+  .task-label .brand-tag { font-family: 'Fraunces', serif; font-style: italic; color: var(--accent); margin-right: 6px; }
+  .task-meta { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+  .empty-state { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-mute); padding: 16px 0; font-size: 13px; }
+  /* Calendar view */
+  .calendar-wrap { background: var(--paper); border: 1px solid var(--line); margin-bottom: 32px; }
+  .calendar-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); background: var(--paper-2); }
+  .calendar-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; }
+  .calendar-nav { display: flex; gap: 8px; align-items: center; }
+  .cal-nav-btn { background: var(--paper); border: 1px solid var(--line); padding: 6px 14px; font-family: inherit; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+  .cal-nav-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .calendar-grid { border-top: 1px solid var(--line); background: var(--paper); }
+  .cal-daylabel-row { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .cal-daylabel { padding: 10px 8px; text-align: center; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); background: var(--paper-2); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-weight: 500; }
+  .cal-daylabel:last-child { border-right: none; }
+  .cal-week { position: relative; border-bottom: 1px solid var(--line); }
+  .cal-week:last-child { border-bottom: none; }
+  .cal-day { position: absolute; top: 0; padding: 6px 10px; background: var(--paper); border-right: 1px solid var(--line); pointer-events: none; }
+  .cal-day:last-child { border-right: none; }
+  .cal-day.today { background: #fff8eb; box-shadow: inset 0 0 0 2px var(--accent); }
+  .cal-day.weekend { background: #ede5d3; }
+  .cal-daynum { font-family: 'Fraunces', serif; font-size: 14px; font-style: italic; color: var(--ink-soft); }
+  .cal-bars { position: absolute; left: 0; right: 0; padding: 0 2px; }
+  .cal-bar { position: absolute; height: 20px; padding: 2px 8px; border-radius: 2px; cursor: pointer; font-size: 11px; line-height: 16px; display: flex; align-items: center; gap: 6px; overflow: hidden; transition: transform 0.1s, box-shadow 0.1s; box-shadow: 0 1px 2px rgba(26,22,18,0.15); margin-left: 2px; }
+  .cal-bar:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(26,22,18,0.25); z-index: 10; }
+  .cal-bar.overdue { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .cal-bar.continues-left { border-top-left-radius: 0; border-bottom-left-radius: 0; padding-left: 4px; }
+  .cal-bar.continues-left::before { content: "‹"; font-size: 10px; opacity: 0.7; margin-right: 2px; }
+  .cal-bar.continues-right { border-top-right-radius: 0; border-bottom-right-radius: 0; padding-right: 4px; }
+  .cal-bar.continues-right::after { content: "›"; font-size: 10px; opacity: 0.7; margin-left: 2px; }
+  .cal-bar-label { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+  .cal-bar-type { font-size: 9px; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.08em; flex-shrink: 0; }
+  .cal-legend { display: flex; gap: 16px; padding: 12px 20px; background: var(--paper-2); border-top: 1px solid var(--line); font-size: 11px; flex-wrap: wrap; }
+  .cal-legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+  .cal-legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+  .backup-banner { background: #fff8eb; border: 1px solid var(--amber); padding: 16px 20px; margin-bottom: 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .backup-banner-text { flex: 1; min-width: 280px; }
+  .backup-banner strong { font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; font-weight: 500; display: block; margin-bottom: 4px; }
+  .backup-banner-actions { display: flex; gap: 8px; }
+
+  .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .insight-card { background: var(--paper); border: 1px solid var(--line); padding: 18px 20px; }
+  .insight-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px; }
+  .insight-value { font-family: 'Fraunces', serif; font-size: 32px; font-style: italic; line-height: 1; }
+  .insight-detail { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-style: italic; }
+  .tailor-bar { margin-bottom: 8px; }
+  .tailor-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px; }
+  .tailor-bar-name { font-family: 'Fraunces', serif; font-style: italic; }
+  .tailor-bar-count { font-size: 11px; color: var(--ink-mute); }
+  .tailor-bar-track { height: 6px; background: var(--paper-2); }
+  .tailor-bar-fill { height: 100%; background: var(--ink); }
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); backdrop-filter: blur(4px); z-index: 100; align-items: flex-start; justify-content: center; padding: 60px 20px; overflow-y: auto; }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: var(--paper); border: 1px solid var(--ink); width: 100%; max-width: 680px; padding: 36px 40px; box-shadow: 0 20px 60px rgba(26,22,18,0.3); position: relative; }
+  .modal h2 { font-family: 'Fraunces', serif; font-style: italic; font-size: 32px; font-weight: 400; margin-bottom: 4px; }
+  .modal .modal-sub { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--ink-mute); font-family: 'Fraunces', serif; }
+  .modal-close:hover { color: var(--accent); }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; font-weight: 500; }
+  .field input, .field select, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); background: var(--paper); font-family: inherit; font-size: 14px; color: var(--ink); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); }
+  .field textarea { resize: vertical; min-height: 60px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .helper { font-size: 11px; color: var(--ink-mute); font-style: italic; margin-top: 4px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .delete-btn { color: var(--accent); background: none; border: 1px solid var(--accent); padding: 8px 14px; font-family: inherit; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-right: auto; }
+  .delete-btn:hover { background: var(--accent); color: var(--paper); }
+  .section-divider { margin: 24px 0 16px; padding-top: 16px; border-top: 1px solid var(--line); font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; }
+  .settings-section { background: var(--paper-2); padding: 20px 24px; border: 1px solid var(--line); margin-bottom: 18px; }
+  .pill-item { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--paper); border: 1px solid var(--line); margin: 4px; font-size: 12px; }
+  .pill-item button { background: none; border: none; color: var(--ink-mute); cursor: pointer; font-size: 14px; padding: 0 2px; }
+  .pill-item button:hover { color: var(--accent); }
+  .pill-item.departed { opacity: 0.55; }
+  .pill-item.departed .pill-name { text-decoration: line-through; }
+  .archive-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .archive-table thead { background: var(--paper-2); }
+  .archive-table th { padding: 10px 12px; text-align: left; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; border-bottom: 1px solid var(--line); }
+  .archive-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .archive-table tr:hover { background: var(--paper-2); cursor: pointer; }
+  .archive-table .brand-cell { font-family: 'Fraunces', serif; font-style: italic; color: var(--accent); font-weight: 500; }
+  .status-badge { display: inline-block; padding: 2px 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .status-badge.completed { background: var(--green-soft); color: var(--green); }
+  .status-badge.not-complete { background: var(--red-soft); color: var(--accent); }
+  .status-badge.paused { background: var(--blue-soft); color: #2a3a54; }
+  .status-badge.half { background: var(--amber-soft); color: var(--amber); }
+  .status-badge.not-scheduled { background: #e8e0e8; color: #6a4a6a; }
+  .checkin-welcome { background: var(--paper-2); border: 1px solid var(--line); padding: 28px 32px; margin-bottom: 28px; }
+  .checkin-welcome p { font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; color: var(--ink-soft); line-height: 1.4; }
+  .job-checkin-row { background: var(--paper); border: 1px solid var(--line); padding: 18px 22px; margin-bottom: 10px; }
+  .job-checkin-row h4 { font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; margin-bottom: 2px; }
+  .job-checkin-row .meta { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 14px; }
+  .saved-indicator { position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: var(--paper); padding: 10px 18px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .saved-indicator.show { opacity: 1; }
+
+  /* Attendance */
+  .attendance-toolbar { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; padding: 16px 20px; background: var(--paper-2); border: 1px solid var(--line); flex-wrap: wrap; }
+  .attendance-toolbar input[type="date"], .attendance-toolbar select { padding: 8px 12px; border: 1px solid var(--line); background: var(--paper); font-family: inherit; font-size: 13px; }
+  .daily-log-grid { display: grid; grid-template-columns: 220px 1fr 140px 1fr; background: var(--paper); border: 1px solid var(--line); }
+  .daily-log-row { display: contents; }
+  .daily-log-cell { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+  .daily-log-row.header .daily-log-cell { background: var(--paper-2); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .staff-name { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
+  .status-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .status-pill { padding: 6px 12px; border: 1px solid var(--line); background: var(--paper); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.12s; font-family: inherit; }
+  .status-pill:hover { border-color: var(--ink); }
+  .status-pill.active { font-weight: 600; }
+  .status-pill.active.present { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+  .status-pill.active.late { background: var(--amber-soft); border-color: var(--amber); color: var(--amber); }
+  .status-pill.active.absent { background: var(--red-soft); border-color: var(--accent); color: var(--accent); }
+  .status-pill.active.half { background: var(--blue-soft); border-color: #2a3a54; color: #2a3a54; }
+  .status-pill.active.sick { background: #e8e0e8; border-color: #6a4a6a; color: #6a4a6a; }
+  .time-input, .note-input { width: 100%; padding: 6px 10px; border: 1px solid var(--line); background: var(--paper); font-family: inherit; font-size: 13px; }
+  .day-quick-label { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; color: var(--ink-soft); margin-bottom: 16px; }
+  .monthly-summary-card { background: var(--paper); border: 1px solid var(--line); padding: 22px 26px; margin-bottom: 16px; }
+  .monthly-summary-card h3 { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; margin-bottom: 4px; }
+  .monthly-summary-card .role { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 16px; }
+  .monthly-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .monthly-stat { background: var(--paper-2); padding: 10px 12px; border-left: 3px solid var(--ink-mute); }
+  .monthly-stat.good { border-left-color: var(--green); }
+  .monthly-stat.warn { border-left-color: var(--amber); }
+  .monthly-stat.bad { border-left-color: var(--accent); }
+  .monthly-stat-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 2px; }
+  .monthly-stat-value { font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; line-height: 1; }
+  .monthly-stat-detail { font-size: 10px; color: var(--ink-soft); margin-top: 2px; }
+  .score-badge { display: inline-block; font-family: 'Fraunces', serif; font-size: 32px; font-style: italic; line-height: 1; margin-left: auto; }
+  .score-badge.good { color: var(--green); }
+  .score-badge.warn { color: var(--amber); }
+  .score-badge.bad { color: var(--accent); }
+  .monthly-detail { font-size: 12px; color: var(--ink-soft); line-height: 1.5; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .month-header-bar { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; margin-bottom: 12px; border-bottom: 1px solid var(--ink); }
+  .print-container { display: none; }
+
+  /* Tech pack preview + print */
+  .techpack-intro { background: var(--paper-2); border: 1px solid var(--line); padding: 24px 28px; margin-bottom: 24px; }
+  .techpack-intro p { font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; line-height: 1.5; color: var(--ink-soft); }
+  .techpack-actions { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .techpack-preview-wrap { background: #ccc; padding: 20px; border: 1px solid var(--line); max-height: 80vh; overflow-y: auto; }
+  .techpack-page { width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto 20px; background: #fff; color: #000; font-family: inherit; font-size: 10pt; line-height: 1.4; page-break-after: always; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .techpack-page:last-child { page-break-after: auto; }
+  .tp-header { border-bottom: 2px solid #000; padding-bottom: 8mm; margin-bottom: 8mm; display: grid; grid-template-columns: 2fr 1fr; gap: 10mm; align-items: end; }
+  .tp-studio-name { font-family: 'Fraunces', serif; font-style: italic; font-size: 22pt; line-height: 1; margin-bottom: 3mm; }
+  .tp-doc-type { font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase; color: #666; }
+  .tp-header-right { text-align: right; font-size: 9pt; }
+  .tp-ref { font-family: 'Fraunces', serif; font-size: 11pt; font-weight: 500; margin-bottom: 2mm; }
+  .tp-title-block { display: grid; grid-template-columns: 2fr 1fr; gap: 10mm; margin-bottom: 6mm; padding-bottom: 4mm; border-bottom: 1px solid #000; }
+  .tp-piece-name { font-family: 'Fraunces', serif; font-size: 24pt; line-height: 1.1; font-weight: 500; }
+  .tp-brand { font-family: 'Fraunces', serif; font-style: italic; font-size: 14pt; color: #444; margin-top: 2mm; }
+  .tp-meta-col { display: flex; flex-direction: column; gap: 3mm; }
+  .tp-meta-item { border-bottom: 1px solid #bbb; padding-bottom: 2mm; }
+  .tp-meta-label { font-size: 7pt; letter-spacing: 0.15em; text-transform: uppercase; color: #666; margin-bottom: 1mm; }
+  .tp-meta-value { font-size: 11pt; font-weight: 500; }
+  .tp-assignment { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6mm; margin-bottom: 6mm; padding: 4mm; background: #f4f4f4; border: 1px solid #000; }
+  .tp-assignment .tp-meta-value { font-size: 13pt; font-weight: 600; }
+  .tp-section { margin-bottom: 6mm; }
+  .tp-section-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 14pt; border-bottom: 1px solid #000; padding-bottom: 2mm; margin-bottom: 4mm; display: flex; justify-content: space-between; align-items: baseline; }
+  .tp-section-num { font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase; color: #888; font-style: normal; font-family: inherit; }
+  .tp-measurements-table, .tp-construction-table, .tp-trim-table, .tp-changelog-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  .tp-measurements-table th, .tp-measurements-table td, .tp-construction-table th, .tp-construction-table td, .tp-trim-table th, .tp-trim-table td, .tp-changelog-table th, .tp-changelog-table td { border: 1px solid #999; padding: 2.5mm 3mm; text-align: left; vertical-align: top; }
+  .tp-measurements-table th, .tp-construction-table th, .tp-trim-table th, .tp-changelog-table th { background: #f0f0f0; font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .tp-blank { height: 7mm; background: #fafafa; }
+  .tp-sketch-box { width: 100%; min-height: 90mm; border: 1px solid #000; background: linear-gradient(#eee 1px, transparent 1px) 0 0 / 100% 5mm, linear-gradient(90deg, #eee 1px, transparent 1px) 0 0 / 5mm 100%, #fff; display: flex; align-items: center; justify-content: center; }
+  .tp-sketch-placeholder { font-family: 'Fraunces', serif; font-style: italic; color: #999; font-size: 10pt; }
+  .tp-sketch-labels { margin-top: 3mm; font-size: 8pt; color: #666; font-style: italic; }
+  .tp-fabric-grid { display: grid; grid-template-columns: 55mm 1fr; gap: 6mm; }
+  .tp-swatch-box { width: 55mm; height: 55mm; border: 1px dashed #000; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-style: italic; color: #999; font-size: 9pt; text-align: center; padding: 4mm; }
+  .tp-fabric-details { display: flex; flex-direction: column; gap: 3mm; }
+  .tp-fabric-row { border-bottom: 1px solid #ccc; padding-bottom: 2mm; }
+  .tp-write-line { border-bottom: 1px solid #999; min-height: 5mm; padding: 1mm 2mm; font-size: 10pt; }
+  .tp-checklist { border: 1px solid #000; padding: 4mm; }
+  .tp-checklist-item { display: grid; grid-template-columns: 8mm 1fr 20mm 20mm; gap: 2mm; padding: 2mm 0; border-bottom: 1px dotted #999; align-items: center; font-size: 9pt; }
+  .tp-checklist-item:last-child { border-bottom: none; }
+  .tp-check-box { width: 5mm; height: 5mm; border: 1px solid #000; display: inline-block; }
+  .tp-signoff-block { border: 2px solid #000; padding: 6mm; margin-top: 6mm; background: #fafafa; }
+  .tp-signoff-title { font-family: 'Fraunces', serif; font-style: italic; font-size: 13pt; margin-bottom: 4mm; padding-bottom: 2mm; border-bottom: 1px solid #000; }
+  .tp-signoff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-bottom: 4mm; }
+  .tp-signoff-field { display: flex; flex-direction: column; }
+  .tp-signoff-label { font-size: 7pt; letter-spacing: 0.15em; text-transform: uppercase; color: #666; margin-bottom: 4mm; }
+  .tp-signoff-line { border-bottom: 1px solid #000; min-height: 10mm; padding: 1mm 2mm; font-size: 10pt; }
+  .tp-signoff-name-preprinted { font-weight: 600; font-size: 11pt; }
+  .tp-notes-box { border: 1px solid #000; padding: 4mm; min-height: 30mm; background: linear-gradient(#ddd 1px, transparent 1px) 0 5mm / 100% 6mm, #fff; font-family: 'Fraunces', serif; font-style: italic; font-size: 10pt; line-height: 6mm; }
+  .tp-prefilled-notes { font-style: normal; font-family: inherit; }
+  .tp-footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid #000; display: flex; justify-content: space-between; font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #888; }
+
+  @media print {
+    @page { size: A4; margin: 15mm; }
+    body * { visibility: hidden; }
+    .print-container, .print-container *, .techpack-preview-wrap, .techpack-preview-wrap * { visibility: visible; }
+    .print-container { display: block !important; position: absolute; left: 0; top: 0; width: 100%; background: white; color: black; }
+    .techpack-preview-wrap { position: absolute; left: 0; top: 0; background: white; padding: 0; border: none; max-height: none; overflow: visible; }
+    .techpack-page { box-shadow: none; margin: 0; width: 210mm; min-height: 297mm; }
+  }
+  .print-container h1 { font-family: 'Fraunces', serif; font-style: italic; font-size: 26pt; margin-bottom: 2mm; }
+  .print-sub { font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase; color: #666; border-bottom: 2px solid #000; padding-bottom: 4mm; margin-bottom: 6mm; }
+  .print-container h2 { font-family: 'Fraunces', serif; font-style: italic; font-size: 18pt; margin: 8mm 0 3mm; border-bottom: 1px solid #000; padding-bottom: 2mm; }
+  .print-role { font-size: 9pt; color: #666; margin-bottom: 4mm; }
+  .print-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-bottom: 5mm; }
+  .print-stat { border: 1px solid #999; padding: 3mm; }
+  .print-stat-label { font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #666; }
+  .print-stat-value { font-family: 'Fraunces', serif; font-size: 18pt; font-style: italic; }
+  .print-days-table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 4mm; }
+  .print-days-table th, .print-days-table td { border: 1px solid #999; padding: 2mm 3mm; text-align: left; }
+  .print-days-table th { background: #f0f0f0; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; }
+  .print-footer { margin-top: 10mm; padding-top: 4mm; border-top: 1px solid #000; font-size: 8pt; display: flex; justify-content: space-between; }
+  .print-signoff { margin-top: 12mm; display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+  .print-signoff-field { border-top: 1px solid #000; padding-top: 2mm; font-size: 8pt; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+
+  @media (max-width: 1100px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 800px) {
+    .container { padding: 20px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .masthead-left h1 { font-size: 40px; }
+    .priority-grid { grid-template-columns: 1fr; }
+    .field-row, .field-row-3 { grid-template-columns: 1fr; }
+    .kanban { grid-template-columns: 1fr; }
+    .daily-log-grid { grid-template-columns: 1fr; }
+  }
+  .hidden { display: none !important; }
+  .small-caps { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <div class="masthead-left">
+      <h1>The Studio</h1>
+      <div class="sub">Production · Atelier · Attendance</div>
+    </div>
+    <div class="masthead-right">
+      <div class="date" id="today-date">—</div>
+      <div class="stats" id="stats-line">—</div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <button class="nav-btn active" data-view="today">Today</button>
+    <button class="nav-btn" data-view="board">Board</button>
+    <button class="nav-btn" data-view="checkin">Check-in</button>
+    <button class="nav-btn" data-view="archive">Archive</button>
+    <button class="nav-btn" data-view="techpacks">Tech Packs</button>
+    <button class="nav-btn" data-view="attendance">Attendance</button>
+    <button class="nav-btn" data-view="settings">Settings</button>
+    <div class="nav-right">
+      <button class="btn btn-ghost" id="add-brand-btn">+ Brand</button>
+      <button class="btn" id="add-job-btn">+ New Job</button>
+    </div>
+  </nav>
+
+  <div class="filters-bar" id="filters-bar">
+    <div class="filter-group">
+      <span class="filter-label">Tailor</span>
+      <select class="filter-select" id="filter-tailor"></select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Brand</span>
+      <select class="filter-select" id="filter-brand"></select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Type</span>
+      <select class="filter-select" id="filter-type">
+        <option value="">All types</option>
+        <option value="sample">Sample</option>
+        <option value="production">Production</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Month</span>
+      <select class="filter-select" id="filter-month"></select>
+    </div>
+    <button class="filter-reset" id="filter-reset">Reset filters</button>
+  </div>
+
+  <section class="view active" id="view-today">
+    <div class="insights-grid" id="insights"></div>
+
+    <div class="calendar-wrap">
+      <div class="calendar-header">
+        <div class="calendar-title" id="calendar-title">—</div>
+        <div class="calendar-nav">
+          <button class="cal-nav-btn" id="cal-prev">← Previous</button>
+          <button class="cal-nav-btn" id="cal-today">Today</button>
+          <button class="cal-nav-btn" id="cal-next">Next →</button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-legend-swatch" style="border-left-color:#2a3a54;"></div>Sample</div>
+        <div class="cal-legend-item"><div class="cal-legend-swatch" style="border-left-color:var(--amber);"></div>Production</div>
+        <div class="cal-legend-item"><div class="cal-legend-swatch" style="border-left-color:#7a3a5a;"></div>Custom</div>
+        <div class="cal-legend-item"><div class="cal-legend-swatch" style="background:var(--red-soft); border-left-color:var(--accent);"></div>Overdue</div>
+        <div class="cal-legend-item" style="margin-left: auto;"><strong>▸</strong> start day · <strong>·</strong> in progress · <strong>▪</strong> end day</div>
+      </div>
+    </div>
+
+    <div class="board-header"><h2 class="section-title">Tailor load</h2><div class="small-caps">Active jobs per tailor</div></div>
+    <div id="tailor-load" style="background: var(--paper); border:1px solid var(--line); padding: 20px 24px;"></div>
+  </section>
+
+  <section class="view" id="view-board">
+    <div class="board-header"><h2 class="section-title">Status board</h2><div class="small-caps">All jobs by status</div></div>
+    <div class="kanban" id="kanban"></div>
+  </section>
+
+  <section class="view" id="view-checkin">
+    <div class="checkin-welcome"><p id="checkin-greeting">Walk through each active job and update where you are.</p></div>
+    <div id="checkin-list"></div>
+  </section>
+
+  <section class="view" id="view-archive">
+    <div class="board-header"><h2 class="section-title">Archive</h2><div class="small-caps">Full historical record</div></div>
+    <div style="background: var(--paper); border: 1px solid var(--line); overflow-x: auto;">
+      <table class="archive-table">
+        <thead><tr><th>Month</th><th>Brand</th><th>Task</th><th>Type</th><th>Dates</th><th>Tailor</th><th>Units</th><th>Status</th></tr></thead>
+        <tbody id="archive-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="view" id="view-techpacks">
+    <div class="board-header"><h2 class="section-title">Tech packs</h2><div class="small-caps">Printable job specifications</div></div>
+    <div class="techpack-intro"><p>Generate a printable tech pack for any job. Fill the fields that matter, print, staple, and hand to the assigned tailor. Rafat's name pre-prints on the Studio Supervisor sign-off line.</p></div>
+    <div class="techpack-actions">
+      <button class="btn" id="generate-blank-btn">Print blank template</button>
+      <button class="btn btn-ghost" id="select-job-btn">Generate from a job</button>
+    </div>
+    <div id="techpack-preview"></div>
+  </section>
+
+  <section class="view" id="view-attendance">
+    <div class="board-header"><h2 class="section-title">Attendance</h2><div class="small-caps">Daily log · monthly review</div></div>
+    <div class="attendance-toolbar">
+      <div class="filter-group">
+        <span class="filter-label">Mode</span>
+        <select id="attendance-mode"><option value="daily">Daily log</option><option value="monthly">Monthly review</option></select>
+      </div>
+      <div class="filter-group" id="daily-date-group">
+        <span class="filter-label">Date</span>
+        <input type="date" id="attendance-date">
+      </div>
+      <div class="filter-group hidden" id="monthly-picker-group">
+        <span class="filter-label">Month</span>
+        <select id="attendance-month"></select>
+      </div>
+      <button class="btn btn-ghost hidden" id="print-monthly-btn">Print summary for Rafat</button>
+    </div>
+    <div id="attendance-daily"></div>
+    <div id="attendance-monthly" class="hidden"></div>
+  </section>
+
+  <section class="view" id="view-settings">
+    <div class="board-header"><h2 class="section-title">Settings</h2><div class="small-caps">Tailor to your studio</div></div>
+
+    <div class="backup-banner">
+      <div class="backup-banner-text">
+        <strong>Back up your data</strong>
+        <div style="font-size: 13px; color: var(--ink-soft);">Download a copy of everything — jobs, attendance, staff — to a file on your computer. If anything goes wrong, you can reload it. Do this weekly.</div>
+      </div>
+      <div class="backup-banner-actions">
+        <button class="btn" id="export-btn">Download backup</button>
+        <button class="btn btn-ghost" id="import-btn">Load from backup</button>
+        <input type="file" id="import-file" accept=".json" style="display:none;">
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="filter-label" style="margin-bottom:10px;">Studio details</div>
+      <div class="field"><label>Studio name</label><input type="text" id="studio-name"></div>
+      <div class="field-row">
+        <div class="field"><label>Supervisor</label><input type="text" id="supervisor-name"></div>
+        <div class="field"><label>Supervisor role</label><input type="text" id="supervisor-role"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Scheduled start time</label><input type="time" id="scheduled-start" value="09:00"></div>
+        <div class="field"><label>Scheduled end time</label><input type="time" id="scheduled-end" value="16:30"></div>
+      </div>
+      <button class="btn" id="save-studio-btn" style="margin-top:8px;">Save studio details</button>
+    </div>
+    <div class="settings-section">
+      <div class="filter-label" style="margin-bottom:10px;">Staff</div>
+      <div class="helper">Departed staff stay in history but don't appear in daily logging.</div>
+      <div id="staff-list" style="margin-top: 12px;"></div>
+      <div style="margin-top:12px; display:grid; grid-template-columns: 1fr 1fr auto; gap:8px;">
+        <input type="text" id="new-staff-name" placeholder="Name" style="padding:10px; border:1px solid var(--line); background:var(--paper); font-family:inherit;">
+        <input type="text" id="new-staff-role" placeholder="Role" style="padding:10px; border:1px solid var(--line); background:var(--paper); font-family:inherit;">
+        <button class="btn btn-ghost" id="add-staff-btn">Add</button>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="filter-label" style="margin-bottom:10px;">Brands / Clients</div>
+      <div id="brands-list"></div>
+    </div>
+    <div class="settings-section" style="border-color: var(--accent);">
+      <div class="filter-label" style="color: var(--accent); margin-bottom: 6px;">Reset</div>
+      <div class="helper">Wipe all data and return to seeded defaults. Can't be undone.</div>
+      <button class="delete-btn" style="margin-top:12px; margin-right:0;" id="reset-btn">Reset all data</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Job Modal -->
+<div class="modal-backdrop" id="job-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('job-modal')">×</button>
+    <h2 id="job-modal-title">New job</h2>
+    <div class="modal-sub" id="job-modal-sub">Enter a piece into the ledger</div>
+    <div class="field-row">
+      <div class="field"><label>Brand / client</label><select id="job-brand"></select></div>
+      <div class="field">
+        <label>Type</label>
+        <select id="job-type">
+          <option value="sample">Sample</option>
+          <option value="production">Production</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Collection</label><input type="text" id="job-collection"></div>
+      <div class="field"><label>Units</label><input type="text" id="job-units"></div>
+    </div>
+    <div class="field"><label>Task / piece</label><input type="text" id="job-task"></div>
+    <div class="field-row-3">
+      <div class="field">
+        <label>Status</label>
+        <select id="job-status">
+          <option value="not-complete">Not complete</option>
+          <option value="half">Half complete</option>
+          <option value="paused">Paused</option>
+          <option value="completed">Completed</option>
+          <option value="not-scheduled">Not scheduled</option>
+        </select>
+      </div>
+      <div class="field"><label>Tailor</label><select id="job-tailor"></select></div>
+      <div class="field">
+        <label>Priority</label>
+        <select id="job-priority">
+          <option value="ui">Urgent & important</option>
+          <option value="i" selected>Important</option>
+          <option value="u">Urgent only</option>
+          <option value="n">Later</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Start date</label><input type="date" id="job-start"></div>
+      <div class="field"><label>End date (promised)</label><input type="date" id="job-end"></div>
+    </div>
+    <div class="field"><label>Realistic end date</label><input type="date" id="job-realistic"><div class="helper">Your honest internal estimate.</div></div>
+    <div id="gap-warning" class="hidden" style="background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; font-size: 13px; font-family: 'Fraunces', serif; font-style: italic;"></div>
+    <div class="field"><label>Notes</label><textarea id="job-notes"></textarea></div>
+    <div class="section-divider">Tech pack details (optional)</div>
+    <div class="field-row">
+      <div class="field"><label>Fabric — main</label><input type="text" id="job-fabric-main"></div>
+      <div class="field"><label>Fabric — lining</label><input type="text" id="job-fabric-lining"></div>
+    </div>
+    <div class="field"><label>Construction notes</label><textarea id="job-construction"></textarea></div>
+    <div class="field"><label>Trim & notions</label><textarea id="job-trims"></textarea></div>
+    <div class="field"><label>"Done looks like…"</label><textarea id="job-done"></textarea></div>
+    <div class="modal-actions">
+      <button class="delete-btn hidden" id="job-delete-btn">Delete</button>
+      <button class="btn btn-ghost hidden" id="job-techpack-btn">Generate tech pack</button>
+      <button class="btn btn-ghost" onclick="closeModal('job-modal')">Cancel</button>
+      <button class="btn" id="job-save-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="brand-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('brand-modal')">×</button>
+    <h2>Add brand / client</h2>
+    <div class="modal-sub">New entry in the ledger</div>
+    <div class="field"><label>Name</label><input type="text" id="brand-name"></div>
+    <div class="field"><label>Notes</label><textarea id="brand-notes"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('brand-modal')">Cancel</button>
+      <button class="btn" id="brand-save-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="job-picker-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('job-picker-modal')">×</button>
+    <h2>Pick a job</h2>
+    <div class="modal-sub">Generate a tech pack from existing job data</div>
+    <div id="job-picker-list" style="max-height: 400px; overflow-y: auto;"></div>
+  </div>
+</div>
+
+<div class="saved-indicator" id="saved-indicator">Saved</div>
+<div class="print-container" id="print-container"></div>
+
+<script>
+// Auto-classify job type from task description
+function classifyType(task) {
+  if (!task) return 'custom';
+  const t = task.toLowerCase();
+  if (t.includes('sample')) return 'sample';
+  if (t.includes('production') || /^\d+\s*x\b/.test(t)) return 'production';
+  return 'custom';
+}
+
+const SEED_BRANDS = [
+  { id: 'b_bywura', name: 'BYWURA', notes: 'Own label' },
+  { id: 'b_eponymous', name: 'EPONYMOUS', notes: '' },
+  { id: 'b_piecesombre', name: 'Piece Sombre', notes: '' },
+  { id: 'b_chaos', name: 'Chaos Fashion Project', notes: '' },
+  { id: 'b_timis', name: 'Timis Wedding', notes: '' },
+  { id: 'b_thomas', name: 'Thomas Chase', notes: '' },
+  { id: 'b_amaechinna', name: 'Amaechinna Iwuh', notes: '' },
+  { id: 'b_london', name: 'London Chase Chef', notes: '' },
+  { id: 'b_triple', name: 'Triple Thread', notes: '' },
+  { id: 'b_garm', name: 'Garm Spot', notes: '' },
+  { id: 'b_offering', name: 'Offering', notes: '' },
+  { id: 'b_wunmii', name: 'WUNMII', notes: '' },
+  { id: 'b_upcycled', name: 'Upcycled by NexCycle', notes: 'In-house' },
+];
+
+const SEED_STAFF = [
+  { id: 's_rafat', name: 'Rafat', role: 'Tailor / Studio Supervisor', active: true, joined: '2025-01-01', departed: '' },
+  { id: 's_razak', name: 'Razak', role: 'Tailor', active: true, joined: '2025-01-01', departed: '' },
+  { id: 's_moyo', name: 'Moyo', role: 'Assistant Tailor', active: true, joined: '2026-03-16', departed: '' },
+  { id: 's_opeye', name: 'Opeyemi', role: 'Assistant Tailor', active: false, joined: '2026-02-04', departed: '2026-03-05' },
+];
+
+function mkJob(brand, type, collection, task, start, end, tailor, units, status, notes, priority='i') {
+  return {
+    id: 'j_' + Math.random().toString(36).slice(2, 10),
+    brand, type: type || classifyType(task),
+    collection: collection || '', task: task || '',
+    start: start || '', end: end || '', realistic: '',
+    tailor: tailor || '', units: units || '',
+    status, notes: notes || '',
+    priority,
+    fabricMain: '', fabricLining: '', construction: '', trims: '', done: '',
+    createdAt: new Date().toISOString(),
+  };
+}
+
+const SEED_JOBS = [
+  mkJob('b_piecesombre','custom','1','Upcycled Denim Jorts and Upcycled Denim Dickies','2026-01-13','2026-01-15','Razak','1 each','half','Have to find embroidery pocket and buy denim for dickies.'),
+  mkJob('b_eponymous','sample','1','Revenge Dress (Sample)','2026-01-14','2026-01-15','Rafat','1','completed','Client wants to make another sample'),
+  mkJob('b_eponymous','sample','1','Tinkerbell Dress (Sample)','2026-01-19','2026-01-20','Rafat','1','completed','Have to sew final fabric sample.'),
+  mkJob('b_chaos','sample','1','Trousers, Bucket Hat and Satin Scarf (Sample)','2026-01-20','2026-01-21','Razak','1','half','Trousers complete'),
+  mkJob('b_eponymous','custom','1','Birthday Dress and Sunset Dress','2026-01-21','2026-01-21','Razak','1','completed','Fabric manipulation is done'),
+  mkJob('b_eponymous','custom','1','Birthday Dress','2026-01-21','2026-01-22','Rafat','1','not-complete','Only cut the fabric for the dress'),
+  mkJob('b_eponymous','custom','1','Sunset Dress','2026-01-22','2026-01-26','Rafat','1','not-complete','Only cut the fabric for the skirt'),
+  mkJob('b_timis','custom','-','Trad Outfit','2026-01-27','2026-02-02','Rafat','1','completed','Only cut the fabric for the top'),
+  mkJob('b_timis','custom','-','Trad Outfit','2026-01-28','2026-02-02','Rafat','1','completed','Sew top and cut skirt'),
+  mkJob('b_eponymous','sample','1','Tinkerbell Dress (Final Sample)','2026-01-29','2026-01-29','Rafat','1','not-complete','Sew with final fabric'),
+  mkJob('b_eponymous','production','1','Production of the Revenge Dress and Tinkerbell Dress','','','Razak','11','not-scheduled','Only cutting the fabric'),
+  mkJob('b_eponymous','production','1','Production of the Birthday Dress and Sunset Dress','','','Razak','11','not-scheduled','Only cutting the fabric'),
+  mkJob('b_thomas','sample','-','x2 Shirt Samples','2026-01-26','2026-01-27','Razak','3','completed','Only cut the calico'),
+  mkJob('b_eponymous','production','1','Production of the Birthday Dress and Sunset Dress','','','Razak','11','not-scheduled','Fabric manipulation of chiffon'),
+  mkJob('b_timis','custom','-','White Wedding','2026-01-30','2026-02-02','Razak','1','not-scheduled','Start making the pattern and sewing.'),
+  mkJob('b_eponymous','custom','1','Sunset Set','2026-02-02','2026-02-16','Rafat','1','half',''),
+  mkJob('b_eponymous','custom','1','Birthday Dress','2026-02-03','2026-02-17','Rafat','1','half',''),
+  mkJob('b_eponymous','custom','1','Tinkerbell Dress','2026-02-04','2026-02-18','Rafat','1','half',''),
+  mkJob('b_amaechinna','sample','1','Batwing top and skirt set (sample)','2026-02-04','2026-02-04','Razak','1 (set)','completed',''),
+  mkJob('b_piecesombre','custom','1','Upcycled Denim Jorts and Upcycled Denim Dickies','2026-02-03','2026-02-03','Razak','1 each','completed','Have to collect the embroidery from Bayo and buy jeans for dickies'),
+  mkJob('b_piecesombre','custom','1','Create oversized bag','2026-02-12','2026-02-12','New Tailor','','not-complete',''),
+  mkJob('b_thomas','sample','-','x2 Shirt Samples','','2026-02-05','Razak','2','not-complete','Add pockets, buttons and logo to shirts'),
+  mkJob('b_eponymous','production','1','Production of the Revenge Dress and Tinkerbell Dress','','','Rafat and Razak','11','not-scheduled','Razak starts then Rafat from the 3rd and New Tailor finishing off Thursday 13th'),
+  mkJob('b_timis','custom','-','White Wedding','2026-02-02','2026-02-10','Razak','1','completed','Just finishing.'),
+  mkJob('b_piecesombre','custom','1','Upcycled Denim Jorts with dickies side pocket','2026-02-16','2026-02-23','Razak','2','completed','One in black and one in blue'),
+  mkJob('b_london','sample','','x5 Samples','2026-02-19','2026-03-09','Razak','5','not-complete','Started making patterns for the tops'),
+  mkJob('b_chaos','sample','1','New Trousers (Sample)','2026-02-17','2026-02-17','Razak','1','not-complete','My size as sample fit'),
+  mkJob('b_bywura','custom','','Start on patterns','2026-02-16','2026-02-20','Razak and Opeye','2','half','Most patterns are complete'),
+  mkJob('b_chaos','custom','1','Bucket Hat','2026-02-19','2026-02-19','New Tailor','1','not-complete',''),
+  mkJob('b_eponymous','custom','1','Sunset Set','2026-03-02','2026-03-05','Rafat','1','completed',''),
+  mkJob('b_bywura','custom','1','Yellow Skirt','2026-03-02','2026-03-05','Rafat','1','not-complete',''),
+  mkJob('b_eponymous','custom','1','Birthday Dress','','2026-03-09','Rafat','1','half',''),
+  mkJob('b_eponymous','custom','1','Tinkerbell Dress','','2026-03-09','Rafat','1','half',''),
+  mkJob('b_amaechinna','custom','1','Batwing top and skirt set','2026-03-09','2026-03-09','Razak','1','half','Need to add fringe beading to the sample'),
+  mkJob('b_triple','sample','','Sample','2026-03-09','2026-03-11','Rafat','1','completed','Sample is complete.'),
+  mkJob('b_london','sample','-','x5 Samples','','2026-03-23','Razak','5','half','2 jacket samples complete and 1 trouser sample.'),
+  mkJob('b_eponymous','custom','1','Westeria Dress','2026-03-11','2026-03-17','Moyo','1','half','Base of sample is complete, need to create the pleats'),
+  mkJob('b_piecesombre','sample','1','x2 Jorts Samples','2026-03-16','','Razak','2','not-complete','Denim has been bought'),
+  mkJob('b_bywura','custom','1','Carry on with collection','','','','','not-scheduled',''),
+  mkJob('b_garm','sample','-','Baby Tee Samples','2026-03-23','','Razak','3','not-complete',''),
+  mkJob('b_garm','production','1','Baby Tee (Production)','2026-03-30','','Razak','20','not-complete',''),
+  mkJob('b_upcycled','sample','1','Samples for workshop','2026-03-31','','','','not-complete',''),
+  mkJob('b_chaos','sample','1','New Trousers (Sample)','2026-03-17','','Razak','1','not-complete','Sample fabric is being printed'),
+  mkJob('b_bywura','production','1','BYWURA production work','2026-04-01','','Moyo','','not-complete','Starting Wednesday 1st','ui'),
+  mkJob('b_eponymous','production','1','Production of the Tinkerbell Dress','2026-04-01','','Rafat','','not-complete','Rafat to start cutting.','ui'),
+  mkJob('b_offering','sample','','Samples','','','Razak','1','not-complete','','i'),
+  mkJob('b_thomas','production','-','Production of shirts','','','Razak','20','not-complete','','i'),
+  mkJob('b_wunmii','sample','2','x3 Samples','2026-07-23','2026-07-27','','3','not-scheduled',''),
+];
+
+function mkAtt(staffId, date, status, actualStart, notes) {
+  return { id: 'a_' + Math.random().toString(36).slice(2, 10), staffId, date, status, actualStart: actualStart || '', notes: notes || '' };
+}
+
+const SEED_ATTENDANCE = [
+  mkAtt('s_rafat','2026-01-13','present','',''),mkAtt('s_razak','2026-01-13','present','',''),
+  mkAtt('s_rafat','2026-01-14','present','',''),mkAtt('s_razak','2026-01-14','present','',''),
+  mkAtt('s_rafat','2026-01-15','present','',''),mkAtt('s_razak','2026-01-15','present','',''),
+  mkAtt('s_rafat','2026-01-19','late','09:45',''),mkAtt('s_razak','2026-01-19','present','',''),
+  mkAtt('s_rafat','2026-01-20','present','',''),mkAtt('s_razak','2026-01-20','present','',''),
+  mkAtt('s_rafat','2026-01-21','present','',''),mkAtt('s_razak','2026-01-21','present','',''),
+  mkAtt('s_rafat','2026-01-22','present','',''),mkAtt('s_razak','2026-01-22','present','',''),
+  mkAtt('s_rafat','2026-01-26','present','',''),mkAtt('s_razak','2026-01-26','present','',''),
+  mkAtt('s_rafat','2026-01-27','present','',''),mkAtt('s_razak','2026-01-27','present','',''),
+  mkAtt('s_rafat','2026-01-28','present','',''),mkAtt('s_razak','2026-01-28','present','',''),
+  mkAtt('s_rafat','2026-01-29','absent','','No show'),mkAtt('s_razak','2026-01-29','present','',''),
+  mkAtt('s_razak','2026-02-02','present','',''),mkAtt('s_rafat','2026-02-02','late','10:30',''),
+  mkAtt('s_razak','2026-02-03','present','',''),mkAtt('s_rafat','2026-02-03','present','',''),
+  mkAtt('s_razak','2026-02-04','present','',''),mkAtt('s_rafat','2026-02-04','late','09:45',''),mkAtt('s_opeye','2026-02-04','present','','First day'),
+  mkAtt('s_razak','2026-02-05','present','',''),mkAtt('s_rafat','2026-02-05','present','',''),mkAtt('s_opeye','2026-02-05','present','',''),
+  mkAtt('s_razak','2026-02-09','present','',''),mkAtt('s_rafat','2026-02-09','present','',''),
+  mkAtt('s_razak','2026-02-10','present','',''),mkAtt('s_rafat','2026-02-10','present','',''),
+  mkAtt('s_razak','2026-02-11','present','',''),mkAtt('s_rafat','2026-02-11','present','',''),
+  mkAtt('s_razak','2026-02-12','absent','','No show'),mkAtt('s_rafat','2026-02-12','present','',''),mkAtt('s_opeye','2026-02-12','present','',''),
+  mkAtt('s_opeye','2026-02-13','present','',''),
+  mkAtt('s_razak','2026-02-16','present','',''),mkAtt('s_rafat','2026-02-16','absent','','No show'),
+  mkAtt('s_razak','2026-02-17','present','',''),mkAtt('s_rafat','2026-02-17','present','',''),
+  mkAtt('s_razak','2026-02-18','absent','','No show'),mkAtt('s_rafat','2026-02-18','present','',''),
+  mkAtt('s_razak','2026-02-19','present','',''),mkAtt('s_rafat','2026-02-19','present','',''),mkAtt('s_opeye','2026-02-19','present','',''),
+  mkAtt('s_opeye','2026-02-20','present','',''),
+  mkAtt('s_razak','2026-02-23','present','',''),mkAtt('s_rafat','2026-02-23','present','',''),
+  mkAtt('s_razak','2026-02-24','present','',''),mkAtt('s_rafat','2026-02-24','present','',''),
+  mkAtt('s_razak','2026-02-25','absent','','No show'),mkAtt('s_rafat','2026-02-25','late','13:00','1 hour extra break'),
+  mkAtt('s_razak','2026-02-26','present','',''),mkAtt('s_rafat','2026-02-26','present','',''),mkAtt('s_opeye','2026-02-26','present','',''),
+  mkAtt('s_opeye','2026-02-27','absent','',''),
+  mkAtt('s_razak','2026-03-02','present','',''),mkAtt('s_rafat','2026-03-02','late','09:30',''),
+  mkAtt('s_razak','2026-03-03','present','',''),mkAtt('s_rafat','2026-03-03','present','',''),
+  mkAtt('s_razak','2026-03-04','present','',''),mkAtt('s_rafat','2026-03-04','present','',''),
+  mkAtt('s_opeye','2026-03-05','present','','Last day'),mkAtt('s_razak','2026-03-05','present','',''),mkAtt('s_rafat','2026-03-05','present','',''),
+  mkAtt('s_razak','2026-03-09','present','',''),mkAtt('s_rafat','2026-03-09','late','09:30',''),
+  mkAtt('s_razak','2026-03-10','present','',''),mkAtt('s_rafat','2026-03-10','present','',''),
+  mkAtt('s_razak','2026-03-11','present','',''),mkAtt('s_rafat','2026-03-11','late','10:30','15 mins extra break'),
+  mkAtt('s_razak','2026-03-12','absent','',''),mkAtt('s_rafat','2026-03-12','present','',''),
+  mkAtt('s_razak','2026-03-16','present','',''),mkAtt('s_rafat','2026-03-16','present','',''),mkAtt('s_moyo','2026-03-16','present','','First day'),
+  mkAtt('s_razak','2026-03-17','present','',''),mkAtt('s_rafat','2026-03-17','present','',''),mkAtt('s_moyo','2026-03-17','present','',''),
+  mkAtt('s_razak','2026-03-18','present','',''),mkAtt('s_rafat','2026-03-18','present','',''),mkAtt('s_moyo','2026-03-18','present','',''),
+  mkAtt('s_razak','2026-03-19','present','',''),mkAtt('s_rafat','2026-03-19','present','',''),mkAtt('s_moyo','2026-03-19','present','',''),
+  mkAtt('s_razak','2026-03-23','present','',''),mkAtt('s_rafat','2026-03-23','absent','',''),mkAtt('s_moyo','2026-03-23','late','09:30',''),
+  mkAtt('s_razak','2026-03-24','late','07:00',''),mkAtt('s_rafat','2026-03-24','present','',''),mkAtt('s_moyo','2026-03-24','present','',''),
+  mkAtt('s_razak','2026-03-25','absent','',''),
+  mkAtt('s_razak','2026-03-26','present','',''),mkAtt('s_rafat','2026-03-26','present','',''),
+  mkAtt('s_razak','2026-03-29','present','',''),mkAtt('s_rafat','2026-03-29','present','',''),mkAtt('s_moyo','2026-03-29','present','',''),
+  mkAtt('s_razak','2026-03-30','present','',''),mkAtt('s_rafat','2026-03-30','present','',''),mkAtt('s_moyo','2026-03-30','present','',''),
+];
+
+// ============================================================
+// STATE
+// ============================================================
+const STORAGE_KEY = 'nexcycle_studio_v4';
+let storageReady = false;
+
+let state = {
+  brands: SEED_BRANDS,
+  tailors: ['Rafat','Razak','Moyo','Opeye','New Tailor'],
+  staff: SEED_STAFF,
+  jobs: SEED_JOBS,
+  attendance: SEED_ATTENDANCE,
+  filters: { tailor:'', brand:'', type:'', month:'' },
+  studio: { name: 'NexCycle · BY.WURA', supervisor: 'Rafat', supervisorRole: 'Studio Supervisor', scheduledStart: '09:00', scheduledEnd: '16:30' },
+  attendanceView: { mode: 'daily', date: '', month: '' },
+  calendarAnchor: '',
+};
+
+async function loadState() {
+  try {
+    if (window.storage && typeof window.storage.get === 'function') {
+      storageReady = true;
+      try {
+        const result = await window.storage.get(STORAGE_KEY);
+        if (result && result.value) {
+          state = Object.assign(state, JSON.parse(result.value));
+          state.jobs.forEach(j => { if (!j.type) j.type = classifyType(j.task); });
+        } else {
+          await saveState();
+        }
+      } catch (e) { await saveState(); }
+    }
+  } catch (e) { console.warn('storage unavailable', e); }
+}
+
+async function saveState() {
+  try {
+    if (storageReady && window.storage) await window.storage.set(STORAGE_KEY, JSON.stringify(state));
+    showSaved();
+  } catch (e) { console.error(e); }
+}
+
+function showSaved() {
+  const el = document.getElementById('saved-indicator');
+  el.classList.add('show');
+  clearTimeout(showSaved._t);
+  showSaved._t = setTimeout(() => el.classList.remove('show'), 1200);
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function uid() { return 'j_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function buid() { return 'b_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function suid() { return 's_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtDate(iso) { if (!iso) return '—'; const d = new Date(iso + 'T00:00:00'); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); }
+function fmtDateLong(iso) { if (!iso) return '—'; const d = new Date(iso + 'T00:00:00'); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); }
+function fmtDateRange(s, e) { if (!s && !e) return '—'; if (s && !e) return fmtDate(s) + ' →'; if (!s && e) return '→ ' + fmtDate(e); return fmtDate(s) + ' – ' + fmtDate(e); }
+function daysUntil(iso) { if (!iso) return null; const t = new Date(); t.setHours(0,0,0,0); const target = new Date(iso+'T00:00:00'); return Math.round((target-t)/86400000); }
+function getMonth(iso) { if (!iso) return ''; return iso.slice(0,7); }
+function monthLabel(ym) { if (!ym) return ''; const [y,m] = ym.split('-'); return new Date(+y,+m-1,1).toLocaleDateString('en-GB',{month:'long',year:'numeric'}); }
+function brandName(id) { const b = state.brands.find(x=>x.id===id); return b?b.name:'Unknown'; }
+function todayIso() { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+function statusLabel(s) { return {'completed':'Completed','not-complete':'Not complete','paused':'Paused','half':'Half complete','not-scheduled':'Not scheduled'}[s]||s; }
+function typeLabel(t) { return {'sample':'Sample','production':'Production','custom':'Custom'}[t]||t; }
+
+function applyFilters(jobs) {
+  return jobs.filter(j => {
+    if (state.filters.tailor && !(j.tailor||'').toLowerCase().includes(state.filters.tailor.toLowerCase())) return false;
+    if (state.filters.brand && j.brand !== state.filters.brand) return false;
+    if (state.filters.type && j.type !== state.filters.type) return false;
+    if (state.filters.month) {
+      const m = getMonth(j.end) || getMonth(j.start);
+      if (m !== state.filters.month) return false;
+    }
+    return true;
+  });
+}
+
+function activeJobs() { return state.jobs.filter(j => j.status !== 'completed'); }
+
+function minutesLate(actual) {
+  if (!actual) return 0;
+  const [ah,am] = actual.split(':').map(Number);
+  const [sh,sm] = state.studio.scheduledStart.split(':').map(Number);
+  return Math.max(0, (ah*60+am) - (sh*60+sm));
+}
+
+// ============================================================
+// MASTHEAD & FILTERS
+// ============================================================
+function renderMasthead() {
+  const now = new Date();
+  document.getElementById('today-date').textContent = now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const total = state.jobs.length;
+  const active = state.jobs.filter(j => j.status !== 'completed').length;
+  const stuck = state.jobs.filter(j => ['paused','half','not-complete'].includes(j.status)).length;
+  document.getElementById('stats-line').textContent = `${total} total · ${active} active · ${stuck} in progress or stuck`;
+}
+
+function renderFilters() {
+  const tailors = [...new Set(state.jobs.map(j => j.tailor).filter(Boolean))].sort();
+  document.getElementById('filter-tailor').innerHTML = '<option value="">All tailors</option>' + tailors.map(t => `<option value="${escapeHtml(t)}" ${state.filters.tailor===t?'selected':''}>${escapeHtml(t)}</option>`).join('');
+  document.getElementById('filter-brand').innerHTML = '<option value="">All brands</option>' + state.brands.map(b => `<option value="${b.id}" ${state.filters.brand===b.id?'selected':''}>${escapeHtml(b.name)}</option>`).join('');
+  document.getElementById('filter-type').value = state.filters.type || '';
+  const months = [...new Set(state.jobs.map(j => getMonth(j.end) || getMonth(j.start)).filter(Boolean))].sort().reverse();
+  document.getElementById('filter-month').innerHTML = '<option value="">All months</option>' + months.map(m => `<option value="${m}" ${state.filters.month===m?'selected':''}>${monthLabel(m)}</option>`).join('');
+}
+
+['filter-tailor','filter-brand','filter-type','filter-month'].forEach(id => {
+  document.getElementById(id).addEventListener('change', e => {
+    const key = id.replace('filter-','');
+    state.filters[key] = e.target.value;
+    saveState(); renderAll();
+  });
+});
+document.getElementById('filter-reset').addEventListener('click', () => {
+  state.filters = { tailor:'', brand:'', type:'', month:'' };
+  saveState(); renderAll();
+});
+
+// ============================================================
+// TODAY
+// ============================================================
+// Calendar
+function getAnchor() {
+  if (state.calendarAnchor) return new Date(state.calendarAnchor + 'T00:00:00');
+  const t = new Date(); t.setHours(0,0,0,0);
+  const dow = t.getDay();
+  const daysToMonday = dow === 0 ? -6 : 1 - dow;
+  t.setDate(t.getDate() + daysToMonday);
+  return t;
+}
+function toIso(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+
+// Tailor colour assignment — stable per name
+const TAILOR_COLOURS = {
+  'Rafat': { bg: '#1a1612', fg: '#f4efe6' },          // deep ink
+  'Razak': { bg: '#b8381f', fg: '#f4efe6' },          // terracotta
+  'Moyo':  { bg: '#3d5a3a', fg: '#f4efe6' },          // sage green
+  'Opeye': { bg: '#7a3a5a', fg: '#f4efe6' },          // muted plum
+  'New Tailor': { bg: '#b8841f', fg: '#1a1612' },     // amber
+};
+const FALLBACK_COLOURS = [
+  { bg: '#4a6a7a', fg: '#f4efe6' },
+  { bg: '#8a4a3a', fg: '#f4efe6' },
+  { bg: '#5a4a7a', fg: '#f4efe6' },
+];
+function tailorColour(name) {
+  if (!name || name.trim() === '') return { bg: '#d4c9b6', fg: '#4a403a' }; // unassigned grey
+  // Match first-name word in case of "Rafat and Razak"
+  const firstWord = name.split(/\s+/)[0];
+  if (TAILOR_COLOURS[firstWord]) return TAILOR_COLOURS[firstWord];
+  // Hash for fallback
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) | 0;
+  return FALLBACK_COLOURS[Math.abs(hash) % FALLBACK_COLOURS.length];
+}
+
+function renderCalendar() {
+  const anchor = getAnchor();
+  const days = [];
+  for (let i = 0; i < 14; i++) { const d = new Date(anchor); d.setDate(anchor.getDate() + i); days.push(d); }
+  const startLabel = anchor.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  const endD = new Date(anchor); endD.setDate(endD.getDate()+13);
+  const endLabel = endD.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('calendar-title').textContent = `${startLabel} – ${endLabel}`;
+  const todayStr = todayIso();
+  const windowStart = toIso(anchor);
+  const windowEnd = toIso(endD);
+
+  // Find jobs in window
+  const jobsInWindow = applyFilters(state.jobs).filter(j => {
+    if (j.status === 'completed') return false;
+    if (!j.start && !j.end) return false;
+    const start = j.start || j.end;
+    const end = j.end || j.start;
+    return !(end < windowStart || start > windowEnd);
+  }).map(j => ({
+    job: j,
+    start: j.start || j.end,
+    end: j.end || j.start,
+  }));
+
+  // Split into two weeks (rows). Each job assigned to track within its week.
+  // dayIndex 0..13. Week 0 = days 0..6, Week 1 = days 7..13.
+  function dayIndexFromIso(iso) {
+    const target = new Date(iso + 'T00:00:00');
+    const ms = target - anchor;
+    return Math.floor(ms / 86400000);
+  }
+
+  // For each week, lay out bars in tracks (rows) so they don't overlap.
+  function layoutWeek(weekIdx) {
+    const weekStart = weekIdx * 7;
+    const weekEnd = weekStart + 6;
+    // Collect bar segments: for each job, the portion that falls within this week
+    const segments = [];
+    jobsInWindow.forEach(item => {
+      const jobStartIdx = Math.max(dayIndexFromIso(item.start), 0);
+      const jobEndIdx = Math.min(dayIndexFromIso(item.end), 13);
+      // Does this job intersect this week?
+      if (jobEndIdx < weekStart || jobStartIdx > weekEnd) return;
+      const segStart = Math.max(jobStartIdx, weekStart);
+      const segEnd = Math.min(jobEndIdx, weekEnd);
+      segments.push({
+        item,
+        segStart, // 0..13
+        segEnd,
+        // sort key for stable layout
+        sortKey: jobStartIdx * 100 + segments.length,
+      });
+    });
+    // Sort by start day, then by end day descending (longer bars first)
+    segments.sort((a, b) => a.segStart - b.segStart || (b.segEnd - b.segStart) - (a.segEnd - a.segStart));
+    // Greedy track assignment
+    const tracks = []; // each track is an array of segments
+    segments.forEach(seg => {
+      let placed = false;
+      for (let t = 0; t < tracks.length; t++) {
+        const last = tracks[t][tracks[t].length - 1];
+        if (last.segEnd < seg.segStart) {
+          tracks[t].push(seg);
+          seg.track = t;
+          placed = true;
+          break;
+        }
+      }
+      if (!placed) {
+        seg.track = tracks.length;
+        tracks.push([seg]);
+      }
+    });
+    return { segments, trackCount: tracks.length };
+  }
+
+  const week1 = layoutWeek(0);
+  const week2 = layoutWeek(1);
+
+  // Build day labels row
+  let html = `<div class="cal-daylabel-row">
+    <div class="cal-daylabel">Mon</div><div class="cal-daylabel">Tue</div><div class="cal-daylabel">Wed</div><div class="cal-daylabel">Thu</div><div class="cal-daylabel">Fri</div><div class="cal-daylabel">Sat</div><div class="cal-daylabel">Sun</div>
+  </div>`;
+
+  // Build each week
+  function renderWeek(weekIdx, layout) {
+    const weekStart = weekIdx * 7;
+    const weekDays = days.slice(weekStart, weekStart + 7);
+    const trackHeight = 22;
+    const headerHeight = 30;
+    const minBodyHeight = 60;
+    const bodyHeight = Math.max(minBodyHeight, layout.trackCount * trackHeight + 8);
+    const totalHeight = headerHeight + bodyHeight;
+
+    let weekHtml = `<div class="cal-week" style="height: ${totalHeight}px;">`;
+    // Day cells (background)
+    weekDays.forEach((d, i) => {
+      const iso = toIso(d);
+      const isToday = iso === todayStr;
+      const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+      const monthTag = d.getDate() === 1 ? ' ' + d.toLocaleDateString('en-GB',{month:'short'}) : '';
+      weekHtml += `<div class="cal-day ${isToday?'today':''} ${isWeekend?'weekend':''}" style="left: ${(i/7)*100}%; width: ${100/7}%; height: ${totalHeight}px;">
+        <div class="cal-daynum">${d.getDate()}${monthTag}</div>
+      </div>`;
+    });
+    // Bars layer
+    weekHtml += `<div class="cal-bars" style="top: ${headerHeight}px; height: ${bodyHeight}px;">`;
+    layout.segments.forEach(seg => {
+      const j = seg.item.job;
+      const colour = tailorColour(j.tailor);
+      const segLengthDays = seg.segEnd - seg.segStart + 1;
+      const startInWeek = seg.segStart - weekStart;
+      const left = (startInWeek / 7) * 100;
+      const width = (segLengthDays / 7) * 100;
+      const top = seg.track * trackHeight + 2;
+      const isOverdue = j.end && j.end < todayStr;
+      // Continuation indicators (if bar continues from prev week or into next week)
+      const startsBefore = dayIndexFromIso(seg.item.start) < weekStart;
+      const endsAfter = dayIndexFromIso(seg.item.end) > weekStart + 6;
+      const labelText = `${brandName(j.brand)} · ${j.task || ''}`;
+      const fullDateRange = `${fmtDate(seg.item.start)} – ${fmtDate(seg.item.end)}`;
+      weekHtml += `<div class="cal-bar ${isOverdue?'overdue':''} ${startsBefore?'continues-left':''} ${endsAfter?'continues-right':''}"
+        style="left: ${left}%; width: calc(${width}% - 4px); top: ${top}px; background: ${colour.bg}; color: ${colour.fg};"
+        data-job="${j.id}"
+        title="${escapeHtml(labelText)} (${fullDateRange}) — ${escapeHtml(j.tailor || 'Unassigned')}">
+        <span class="cal-bar-label">${escapeHtml(labelText)}</span>
+        <span class="cal-bar-type">${escapeHtml(typeLabel(j.type || 'custom'))}</span>
+      </div>`;
+    });
+    weekHtml += `</div>`; // close cal-bars
+    weekHtml += `</div>`; // close cal-week
+    return weekHtml;
+  }
+
+  html += renderWeek(0, week1);
+  html += renderWeek(1, week2);
+
+  document.getElementById('calendar-grid').innerHTML = html;
+  document.querySelectorAll('#calendar-grid [data-job]').forEach(el => el.addEventListener('click', () => openJobModal(el.dataset.job)));
+
+  // Refresh legend for tailors
+  renderCalendarLegend();
+}
+
+function renderCalendarLegend() {
+  const legend = document.querySelector('.cal-legend');
+  if (!legend) return;
+  // Active tailors with at least one job in current state
+  const tailorSet = [...new Set(state.jobs.filter(j => j.status !== 'completed').map(j => j.tailor || ''))];
+  const tailors = tailorSet.filter(Boolean).map(t => t.split(/\s+/)[0]).filter((v,i,a) => a.indexOf(v) === i);
+  let html = '';
+  tailors.forEach(t => {
+    const c = tailorColour(t);
+    html += `<div class="cal-legend-item"><div class="cal-legend-swatch" style="background: ${c.bg};"></div>${escapeHtml(t)}</div>`;
+  });
+  if (tailorSet.includes('') || tailorSet.includes(undefined)) {
+    html += `<div class="cal-legend-item"><div class="cal-legend-swatch" style="background: #d4c9b6;"></div>Unassigned</div>`;
+  }
+  html += `<div class="cal-legend-item" style="margin-left: auto;">Bar length = job duration · click to edit</div>`;
+  legend.innerHTML = html;
+}
+
+document.getElementById('cal-prev').addEventListener('click', () => { const a = getAnchor(); a.setDate(a.getDate() - 14); state.calendarAnchor = toIso(a); saveState(); renderCalendar(); });
+document.getElementById('cal-next').addEventListener('click', () => { const a = getAnchor(); a.setDate(a.getDate() + 14); state.calendarAnchor = toIso(a); saveState(); renderCalendar(); });
+document.getElementById('cal-today').addEventListener('click', () => { state.calendarAnchor = ''; saveState(); renderCalendar(); });
+
+// Export / Import
+document.getElementById('export-btn').addEventListener('click', () => {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const ts = new Date().toISOString().slice(0,10);
+  a.href = url; a.download = `nexcycle-backup-${ts}.json`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+document.getElementById('import-file').addEventListener('change', e => {
+  const file = e.target.files[0]; if (!file) return;
+  if (!confirm('Loading a backup will replace all current data. Download a backup first if you want to keep what you have. Continue?')) { e.target.value = ''; return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const loaded = JSON.parse(ev.target.result);
+      if (!loaded.jobs || !loaded.brands) { alert('That file does not look like a studio backup.'); return; }
+      state = Object.assign({}, state, loaded);
+      saveState(); renderAll();
+      alert('Backup loaded successfully.');
+    } catch (err) { alert('Could not read that file: ' + err.message); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function renderToday() {
+  const jobs = applyFilters(activeJobs());
+  const total = state.jobs.length;
+  const completed = state.jobs.filter(j => j.status === 'completed').length;
+  const rate = total > 0 ? Math.round((completed/total)*100) : 0;
+  const overdue = jobs.filter(j => j.end && daysUntil(j.end) < 0).length;
+  const halfStuck = state.jobs.filter(j => j.status === 'half').length;
+
+  // Type breakdown for active jobs
+  const samples = jobs.filter(j => j.type === 'sample').length;
+  const production = jobs.filter(j => j.type === 'production').length;
+  const custom = jobs.filter(j => j.type === 'custom').length;
+
+  document.getElementById('insights').innerHTML = `
+    <div class="insight-card">
+      <div class="insight-label">Active jobs</div>
+      <div class="insight-value">${jobs.length}</div>
+      <div class="insight-detail">${samples} samples · ${production} production · ${custom} custom</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">Completion rate</div>
+      <div class="insight-value">${rate}%</div>
+      <div class="insight-detail">${completed} of ${total} all-time</div>
+    </div>
+    <div class="insight-card" style="border-color: var(--accent);">
+      <div class="insight-label" style="color: var(--accent);">Overdue</div>
+      <div class="insight-value" style="color: var(--accent);">${overdue}</div>
+      <div class="insight-detail">past end date, not done</div>
+    </div>
+    <div class="insight-card" style="border-color: var(--amber);">
+      <div class="insight-label" style="color: var(--amber);">Half complete</div>
+      <div class="insight-value" style="color: var(--amber);">${halfStuck}</div>
+      <div class="insight-detail">where things quietly stall</div>
+    </div>
+  `;
+
+  renderCalendar();
+
+  const byTailor = {};
+  jobs.forEach(j => { const t = j.tailor || 'Unassigned'; byTailor[t] = (byTailor[t]||0)+1; });
+  const max = Math.max(...Object.values(byTailor), 1);
+  document.getElementById('tailor-load').innerHTML = Object.entries(byTailor).sort((a,b)=>b[1]-a[1]).map(([t,n]) => `
+    <div class="tailor-bar">
+      <div class="tailor-bar-label"><span class="tailor-bar-name">${escapeHtml(t)}</span><span class="tailor-bar-count">${n} job${n===1?'':'s'}</span></div>
+      <div class="tailor-bar-track"><div class="tailor-bar-fill" style="width:${(n/max)*100}%"></div></div>
+    </div>
+  `).join('') || '<div class="empty-state">No active jobs</div>';
+}
+
+function renderQuadrant(id, jobs) {
+  const el = document.getElementById(id);
+  if (jobs.length === 0) { el.innerHTML = '<div class="empty-state">Nothing here.</div>'; return; }
+  jobs.sort((a,b) => (daysUntil(a.end) ?? 999) - (daysUntil(b.end) ?? 999));
+  el.innerHTML = jobs.map(j => {
+    const days = daysUntil(j.end);
+    const dayLabel = days === null ? '—' : (days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'today' : `in ${days}d`);
+    const overdue = days !== null && days < 0;
+    return `
+      <div class="task-item" data-job="${j.id}">
+        <div class="task-label">
+          <span class="brand-tag">${escapeHtml(brandName(j.brand))}</span>${escapeHtml(j.task || '—')}${j.tailor ? ` <span class="small-caps">· ${escapeHtml(j.tailor)}</span>` : ''}
+          <div><span class="type-tag ${j.type||'custom'}">${typeLabel(j.type||'custom')}</span></div>
+        </div>
+        <div class="task-meta ${overdue?'job-overdue':''}">${dayLabel}</div>
+      </div>
+    `;
+  }).join('');
+  el.querySelectorAll('.task-item').forEach(row => row.addEventListener('click', () => openJobModal(row.dataset.job)));
+}
+
+// ============================================================
+// BOARD
+// ============================================================
+const STATUS_COLS = [
+  { key:'not-complete', label:'Not complete', cls:'not-complete' },
+  { key:'half', label:'Half complete', cls:'half' },
+  { key:'paused', label:'Paused', cls:'paused' },
+  { key:'not-scheduled', label:'Not scheduled', cls:'not-scheduled' },
+  { key:'completed', label:'Completed', cls:'completed' },
+];
+
+function renderBoard() {
+  const jobs = applyFilters(state.jobs);
+  document.getElementById('kanban').innerHTML = STATUS_COLS.map(col => {
+    const colJobs = jobs.filter(j => j.status === col.key);
+    return `
+      <div class="status-col ${col.cls}">
+        <div class="status-col-header">
+          <div class="status-col-title">${col.label}</div>
+          <div class="status-col-count">${colJobs.length}</div>
+        </div>
+        <div>${colJobs.map(j => renderJobCard(j)).join('') || '<div class="empty-state" style="font-size:12px;">Empty</div>'}</div>
+      </div>
+    `;
+  }).join('');
+  document.querySelectorAll('#kanban [data-job]').forEach(el => el.addEventListener('click', () => openJobModal(el.dataset.job)));
+}
+
+function renderJobCard(j) {
+  const days = daysUntil(j.end);
+  const overdue = days !== null && days < 0 && j.status !== 'completed';
+  const dayText = days === null ? '' : (days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'today' : `in ${days}d`);
+  return `
+    <div class="job-card" data-job="${j.id}">
+      <span class="type-tag ${j.type||'custom'}">${typeLabel(j.type||'custom')}</span>
+      <div class="job-brand">${escapeHtml(brandName(j.brand))}</div>
+      <div class="job-task">${escapeHtml(j.task || '—')}</div>
+      <div class="job-meta-row">
+        <span class="job-tailor">${escapeHtml(j.tailor || 'Unassigned')}</span>
+        <span class="${overdue?'job-overdue':''}">${dayText || fmtDate(j.end)}</span>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// CHECK-IN
+// ============================================================
+function renderCheckin() {
+  const list = document.getElementById('checkin-list');
+  const active = applyFilters(activeJobs());
+  if (active.length === 0) { list.innerHTML = '<div class="empty-state">Nothing active.</div>'; return; }
+  list.innerHTML = active.map(j => {
+    const statusOpts = STATUS_COLS.map(s => `<option value="${s.key}" ${s.key===j.status?'selected':''}>${s.label}</option>`).join('');
+    const prioOpts = [['ui','Urgent & important'],['i','Important'],['u','Urgent only'],['n','Later']].map(([v,l]) => `<option value="${v}" ${j.priority===v?'selected':''}>${l}</option>`).join('');
+    const tailorOpts = '<option value="">Unassigned</option>' + state.tailors.map(t => `<option ${t===j.tailor?'selected':''}>${escapeHtml(t)}</option>`).join('');
+    return `
+      <div class="job-checkin-row" data-job="${j.id}">
+        <h4>${escapeHtml(brandName(j.brand))} — ${escapeHtml(j.task||'')}</h4>
+        <div class="meta"><span class="type-tag ${j.type||'custom'}">${typeLabel(j.type||'custom')}</span> ${fmtDateRange(j.start,j.end)} · ${escapeHtml(j.tailor||'Unassigned')} · ${j.units ? escapeHtml(j.units)+' units' : 'units not set'}</div>
+        <div class="field-row-3">
+          <div class="field"><label>Status</label><select class="ci-status">${statusOpts}</select></div>
+          <div class="field"><label>Tailor</label><select class="ci-tailor">${tailorOpts}</select></div>
+          <div class="field"><label>Priority</label><select class="ci-prio">${prioOpts}</select></div>
+        </div>
+        <div class="field"><label>Notes / update</label><textarea class="ci-notes" style="min-height:50px;">${escapeHtml(j.notes||'')}</textarea></div>
+      </div>
+    `;
+  }).join('');
+  list.querySelectorAll('.job-checkin-row').forEach(row => {
+    const id = row.dataset.job;
+    row.querySelector('.ci-status').addEventListener('change', e => updateJob(id, { status: e.target.value }));
+    row.querySelector('.ci-tailor').addEventListener('change', e => updateJob(id, { tailor: e.target.value }));
+    row.querySelector('.ci-prio').addEventListener('change', e => updateJob(id, { priority: e.target.value }));
+    row.querySelector('.ci-notes').addEventListener('change', e => updateJob(id, { notes: e.target.value }));
+  });
+}
+
+// ============================================================
+// ARCHIVE
+// ============================================================
+function renderArchive() {
+  const jobs = applyFilters([...state.jobs]).sort((a,b) => {
+    const da = a.end || a.start || ''; const db = b.end || b.start || '';
+    return db.localeCompare(da);
+  });
+  const tbody = document.getElementById('archive-tbody');
+  if (jobs.length === 0) { tbody.innerHTML = '<tr><td colspan="8" class="empty-state" style="text-align:center;">No jobs match.</td></tr>'; return; }
+  tbody.innerHTML = jobs.map(j => `
+    <tr data-job="${j.id}">
+      <td class="small-caps">${monthLabel(getMonth(j.end)||getMonth(j.start)) || '—'}</td>
+      <td class="brand-cell">${escapeHtml(brandName(j.brand))}</td>
+      <td>${escapeHtml(j.task||'—')}</td>
+      <td><span class="type-tag ${j.type||'custom'}">${typeLabel(j.type||'custom')}</span></td>
+      <td>${fmtDateRange(j.start,j.end)}</td>
+      <td>${escapeHtml(j.tailor||'—')}</td>
+      <td>${escapeHtml(j.units||'—')}</td>
+      <td><span class="status-badge ${j.status}">${statusLabel(j.status)}</span></td>
+    </tr>
+  `).join('');
+  tbody.querySelectorAll('tr[data-job]').forEach(row => row.addEventListener('click', () => openJobModal(row.dataset.job)));
+}
+
+// ============================================================
+// ATTENDANCE
+// ============================================================
+function renderAttendance() {
+  const mode = state.attendanceView.mode || 'daily';
+  document.getElementById('attendance-mode').value = mode;
+  if (mode === 'daily') {
+    document.getElementById('daily-date-group').classList.remove('hidden');
+    document.getElementById('monthly-picker-group').classList.add('hidden');
+    document.getElementById('print-monthly-btn').classList.add('hidden');
+    document.getElementById('attendance-daily').classList.remove('hidden');
+    document.getElementById('attendance-monthly').classList.add('hidden');
+    renderDailyLog();
+  } else {
+    document.getElementById('daily-date-group').classList.add('hidden');
+    document.getElementById('monthly-picker-group').classList.remove('hidden');
+    document.getElementById('print-monthly-btn').classList.remove('hidden');
+    document.getElementById('attendance-daily').classList.add('hidden');
+    document.getElementById('attendance-monthly').classList.remove('hidden');
+    renderMonthlyReview();
+  }
+}
+
+function renderDailyLog() {
+  const dateInput = document.getElementById('attendance-date');
+  if (!state.attendanceView.date) state.attendanceView.date = todayIso();
+  dateInput.value = state.attendanceView.date;
+  const date = state.attendanceView.date;
+  const activeStaff = state.staff.filter(s => {
+    if (!s.active) return false;
+    if (s.departed && s.departed < date) return false;
+    if (s.joined && s.joined > date) return false;
+    return true;
+  });
+  const d = new Date(date + 'T00:00:00');
+  const niceDate = d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  let html = `<div class="day-quick-label">${niceDate}</div>`;
+  if (activeStaff.length === 0) {
+    html += '<div class="empty-state">No active staff for this date.</div>';
+    document.getElementById('attendance-daily').innerHTML = html;
+    return;
+  }
+  html += `
+    <div class="daily-log-grid">
+      <div class="daily-log-row header">
+        <div class="daily-log-cell">Staff</div>
+        <div class="daily-log-cell">Status</div>
+        <div class="daily-log-cell">Actual start</div>
+        <div class="daily-log-cell">Note</div>
+      </div>
+      ${activeStaff.map(s => {
+        const rec = state.attendance.find(a => a.staffId === s.id && a.date === date);
+        const status = rec ? rec.status : '';
+        const actual = rec ? rec.actualStart : '';
+        const note = rec ? rec.notes : '';
+        return `
+          <div class="daily-log-row" data-staff="${s.id}">
+            <div class="daily-log-cell">
+              <div>
+                <div class="staff-name">${escapeHtml(s.name)}</div>
+                <div style="font-size: 11px; color: var(--ink-mute); margin-top: 2px;">${escapeHtml(s.role)}</div>
+              </div>
+            </div>
+            <div class="daily-log-cell">
+              <div class="status-pills">
+                ${['present','late','absent','half','sick'].map(st => `<button class="status-pill ${st} ${status===st?'active':''}" data-status="${st}">${st}</button>`).join('')}
+              </div>
+            </div>
+            <div class="daily-log-cell"><input type="time" class="time-input att-time" value="${actual}"></div>
+            <div class="daily-log-cell"><input type="text" class="note-input att-note" value="${escapeHtml(note)}" placeholder="optional note"></div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <div style="margin-top: 20px; padding: 14px 18px; background: var(--paper-2); border: 1px solid var(--line); font-size: 13px;">
+      <strong style="font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;">Quick:</strong>
+      <button class="btn btn-ghost" style="margin-left: 12px;" id="mark-all-present-btn">Mark all present</button>
+    </div>
+  `;
+  document.getElementById('attendance-daily').innerHTML = html;
+
+  document.querySelectorAll('.daily-log-row[data-staff]').forEach(row => {
+    const staffId = row.dataset.staff;
+    row.querySelectorAll('.status-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        saveAttendance(staffId, date, { status: btn.dataset.status });
+        renderDailyLog();
+      });
+    });
+    const timeInput = row.querySelector('.att-time');
+    if (timeInput) timeInput.addEventListener('change', e => saveAttendance(staffId, date, { actualStart: e.target.value }));
+    const noteInput = row.querySelector('.att-note');
+    if (noteInput) noteInput.addEventListener('change', e => saveAttendance(staffId, date, { notes: e.target.value }));
+  });
+  document.getElementById('mark-all-present-btn').addEventListener('click', () => {
+    activeStaff.forEach(s => {
+      const existing = state.attendance.find(a => a.staffId === s.id && a.date === date);
+      if (!existing) state.attendance.push(mkAtt(s.id, date, 'present', '', ''));
+    });
+    saveState();
+    renderDailyLog();
+  });
+}
+
+function saveAttendance(staffId, date, patch) {
+  let rec = state.attendance.find(a => a.staffId === staffId && a.date === date);
+  if (!rec) { rec = mkAtt(staffId, date, 'present', '', ''); state.attendance.push(rec); }
+  Object.assign(rec, patch);
+  saveState();
+}
+
+document.getElementById('attendance-mode').addEventListener('change', e => { state.attendanceView.mode = e.target.value; saveState(); renderAttendance(); });
+document.getElementById('attendance-date').addEventListener('change', e => { state.attendanceView.date = e.target.value; saveState(); renderDailyLog(); });
+
+function computeMonthStats(staffId, ym) {
+  const records = state.attendance.filter(a => a.staffId === staffId && getMonth(a.date) === ym);
+  const present = records.filter(r => r.status === 'present').length;
+  const late = records.filter(r => r.status === 'late').length;
+  const absent = records.filter(r => r.status === 'absent').length;
+  const half = records.filter(r => r.status === 'half').length;
+  const sick = records.filter(r => r.status === 'sick').length;
+  const totalDays = records.length;
+  const totalLateMins = records.filter(r => r.status === 'late').reduce((sum, r) => sum + minutesLate(r.actualStart), 0);
+  const score = totalDays === 0 ? null : Math.round(((present*1.0) + (late*0.85) + (half*0.5) + (sick*0.9) + (absent*0)) / totalDays * 100);
+  return { records, present, late, absent, half, sick, totalDays, totalLateMins, score };
+}
+
+function renderMonthlyReview() {
+  const months = [...new Set(state.attendance.map(a => getMonth(a.date)).filter(Boolean))].sort().reverse();
+  if (!state.attendanceView.month && months.length > 0) state.attendanceView.month = months[0];
+  document.getElementById('attendance-month').innerHTML = months.map(m => `<option value="${m}" ${state.attendanceView.month===m?'selected':''}>${monthLabel(m)}</option>`).join('');
+  const ym = state.attendanceView.month;
+  if (!ym) { document.getElementById('attendance-monthly').innerHTML = '<div class="empty-state">No attendance data yet.</div>'; return; }
+  const activeStaff = state.staff.filter(s => state.attendance.some(a => a.staffId === s.id && getMonth(a.date) === ym));
+  let html = `
+    <div class="month-header-bar">
+      <div class="section-title" style="font-size: 26px;">${monthLabel(ym)}</div>
+      <div class="small-caps">${activeStaff.length} staff · ${state.attendance.filter(a => getMonth(a.date) === ym).length} records</div>
+    </div>
+  `;
+  if (activeStaff.length === 0) { html += '<div class="empty-state">No records for this month.</div>'; document.getElementById('attendance-monthly').innerHTML = html; return; }
+  activeStaff.forEach(s => {
+    const st = computeMonthStats(s.id, ym);
+    const scoreCls = st.score === null ? '' : (st.score >= 90 ? 'good' : st.score >= 75 ? 'warn' : 'bad');
+    html += `
+      <div class="monthly-summary-card">
+        <div style="display: flex; align-items: baseline; gap: 16px;">
+          <div>
+            <h3>${escapeHtml(s.name)}</h3>
+            <div class="role">${escapeHtml(s.role)}${!s.active ? ' · departed ' + fmtDate(s.departed) : ''}</div>
+          </div>
+          ${st.score !== null ? `<span class="score-badge ${scoreCls}">${st.score}%</span>` : ''}
+        </div>
+        <div class="monthly-stats-grid">
+          <div class="monthly-stat good"><div class="monthly-stat-label">Present</div><div class="monthly-stat-value">${st.present}</div></div>
+          <div class="monthly-stat ${st.late>0?'warn':''}"><div class="monthly-stat-label">Late</div><div class="monthly-stat-value">${st.late}</div>${st.late>0?`<div class="monthly-stat-detail">${st.totalLateMins} min total</div>`:''}</div>
+          <div class="monthly-stat ${st.absent>0?'bad':''}"><div class="monthly-stat-label">Absent</div><div class="monthly-stat-value">${st.absent}</div></div>
+          <div class="monthly-stat ${st.half>0?'warn':''}"><div class="monthly-stat-label">Half days</div><div class="monthly-stat-value">${st.half}</div></div>
+          <div class="monthly-stat ${st.sick>0?'warn':''}"><div class="monthly-stat-label">Sick</div><div class="monthly-stat-value">${st.sick}</div></div>
+          <div class="monthly-stat"><div class="monthly-stat-label">Days logged</div><div class="monthly-stat-value">${st.totalDays}</div></div>
+        </div>
+        ${renderMonthDetail(st)}
+      </div>
+    `;
+  });
+  document.getElementById('attendance-monthly').innerHTML = html;
+}
+
+function renderMonthDetail(st) {
+  if (st.totalDays === 0) return '';
+  const flagged = st.records.filter(r => r.status !== 'present').sort((a,b) => a.date.localeCompare(b.date));
+  if (flagged.length === 0) return '<div class="monthly-detail"><em>Perfect month — no flags.</em></div>';
+  return `
+    <div class="monthly-detail">
+      <div style="font-weight: 500; margin-bottom: 6px;">Flagged days:</div>
+      ${flagged.map(r => `
+        <div style="display: grid; grid-template-columns: 100px 110px 1fr; gap: 8px; padding: 3px 0;">
+          <span>${fmtDate(r.date)}</span>
+          <span class="status-badge ${r.status==='absent'?'not-complete':r.status==='late'?'half':'paused'}" style="text-align:center;">${r.status}${r.actualStart?' '+r.actualStart:''}</span>
+          <span style="color: var(--ink-mute);">${escapeHtml(r.notes||'')}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+document.getElementById('attendance-month').addEventListener('change', e => { state.attendanceView.month = e.target.value; saveState(); renderMonthlyReview(); });
+
+document.getElementById('print-monthly-btn').addEventListener('click', () => {
+  const ym = state.attendanceView.month;
+  if (!ym) return;
+  const container = document.getElementById('print-container');
+  const activeStaff = state.staff.filter(s => state.attendance.some(a => a.staffId === s.id && getMonth(a.date) === ym));
+  let html = `<h1>${escapeHtml(state.studio.name)}</h1><div class="print-sub">Attendance summary · ${monthLabel(ym)}</div>`;
+  activeStaff.forEach(s => {
+    const st = computeMonthStats(s.id, ym);
+    const flagged = st.records.filter(r => r.status !== 'present').sort((a,b) => a.date.localeCompare(b.date));
+    html += `
+      <h2>${escapeHtml(s.name)}${st.score !== null ? ' — ' + st.score + '%' : ''}</h2>
+      <div class="print-role">${escapeHtml(s.role)}${!s.active ? ' · departed ' + fmtDate(s.departed) : ''}</div>
+      <div class="print-stats">
+        <div class="print-stat"><div class="print-stat-label">Present</div><div class="print-stat-value">${st.present}</div></div>
+        <div class="print-stat"><div class="print-stat-label">Late</div><div class="print-stat-value">${st.late}</div></div>
+        <div class="print-stat"><div class="print-stat-label">Absent</div><div class="print-stat-value">${st.absent}</div></div>
+        <div class="print-stat"><div class="print-stat-label">Half / Sick</div><div class="print-stat-value">${st.half + st.sick}</div></div>
+      </div>
+    `;
+    if (flagged.length > 0) {
+      html += `
+        <table class="print-days-table">
+          <thead><tr><th style="width:25%;">Date</th><th style="width:20%;">Status</th><th style="width:15%;">Arrived</th><th>Note</th></tr></thead>
+          <tbody>${flagged.map(r => `<tr><td>${fmtDateLong(r.date)}</td><td>${r.status}</td><td>${r.actualStart||'—'}</td><td>${escapeHtml(r.notes||'')}</td></tr>`).join('')}</tbody>
+        </table>
+      `;
+    } else {
+      html += `<p style="font-style: italic; color: #666;">No flagged days this month.</p>`;
+    }
+  });
+  html += `
+    <div class="print-signoff">
+      <div class="print-signoff-field">Reviewed by — Wura</div>
+      <div class="print-signoff-field">Supervisor — ${escapeHtml(state.studio.supervisor)}</div>
+    </div>
+    <div class="print-footer">
+      <span>Generated ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>
+      <span>${escapeHtml(state.studio.name)}</span>
+    </div>
+  `;
+  container.innerHTML = html;
+  window.print();
+});
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function renderSettings() {
+  document.getElementById('studio-name').value = state.studio.name || '';
+  document.getElementById('supervisor-name').value = state.studio.supervisor || '';
+  document.getElementById('supervisor-role').value = state.studio.supervisorRole || '';
+  document.getElementById('scheduled-start').value = state.studio.scheduledStart || '09:00';
+  document.getElementById('scheduled-end').value = state.studio.scheduledEnd || '16:30';
+
+  const sl = document.getElementById('staff-list');
+  sl.innerHTML = state.staff.map(s => `
+    <span class="pill-item ${s.active?'':'departed'}">
+      <span class="pill-name">${escapeHtml(s.name)}</span>
+      <span style="color: var(--ink-mute); font-size: 11px;">· ${escapeHtml(s.role)}</span>
+      ${s.active ? `<button data-depart="${s.id}" title="Mark departed">↓</button>` : `<button data-rehire="${s.id}" title="Rehire">↑</button>`}
+      <button data-rem="${s.id}" title="Delete">×</button>
+    </span>
+  `).join('');
+  sl.querySelectorAll('[data-depart]').forEach(b => {
+    b.addEventListener('click', () => {
+      const s = state.staff.find(x => x.id === b.dataset.depart);
+      const when = prompt('Departure date (YYYY-MM-DD)?', todayIso());
+      if (s && when) { s.departed = when; s.active = false; saveState(); renderAll(); }
+    });
+  });
+  sl.querySelectorAll('[data-rehire]').forEach(b => {
+    b.addEventListener('click', () => {
+      const s = state.staff.find(x => x.id === b.dataset.rehire);
+      if (s) { s.active = true; s.departed = ''; saveState(); renderAll(); }
+    });
+  });
+  sl.querySelectorAll('[data-rem]').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = b.dataset.rem;
+      if (state.attendance.some(a => a.staffId === id)) {
+        if (!confirm('This staff member has attendance records. Delete permanently?')) return;
+      }
+      state.staff = state.staff.filter(x => x.id !== id);
+      state.attendance = state.attendance.filter(a => a.staffId !== id);
+      saveState(); renderAll();
+    });
+  });
+
+  const bl = document.getElementById('brands-list');
+  bl.innerHTML = state.brands.map(b => `<span class="pill-item">${escapeHtml(b.name)}<button data-rem-brand="${b.id}">×</button></span>`).join('');
+  bl.querySelectorAll('[data-rem-brand]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.remBrand;
+      if (state.jobs.some(j => j.brand === id)) { alert('This brand has jobs.'); return; }
+      state.brands = state.brands.filter(x => x.id !== id);
+      saveState(); renderAll();
+    });
+  });
+}
+
+document.getElementById('save-studio-btn').addEventListener('click', () => {
+  state.studio = {
+    name: document.getElementById('studio-name').value.trim(),
+    supervisor: document.getElementById('supervisor-name').value.trim(),
+    supervisorRole: document.getElementById('supervisor-role').value.trim(),
+    scheduledStart: document.getElementById('scheduled-start').value,
+    scheduledEnd: document.getElementById('scheduled-end').value,
+  };
+  saveState();
+});
+
+document.getElementById('add-staff-btn').addEventListener('click', () => {
+  const name = document.getElementById('new-staff-name').value.trim();
+  const role = document.getElementById('new-staff-role').value.trim();
+  if (!name) { alert('Name required.'); return; }
+  state.staff.push({ id: suid(), name, role: role||'Tailor', active: true, joined: todayIso(), departed: '' });
+  if (!state.tailors.includes(name)) state.tailors.push(name);
+  document.getElementById('new-staff-name').value = '';
+  document.getElementById('new-staff-role').value = '';
+  saveState(); renderAll();
+});
+
+// ============================================================
+// TECH PACKS
+// ============================================================
+const DEFAULT_MEASUREMENTS = [['Bust / Chest'],['Waist'],['Hip'],['Shoulder'],['Sleeve length'],['Sleeve opening'],['Bicep'],['Neckline depth'],['Centre back length'],['Front length'],['Hem width'],['Inseam']];
+const DEFAULT_QUALITY_CHECKS = ['Measurements match spec within ±0.5 cm','All seams straight, no puckering','Seam allowances consistent & finished','Hems even, pressed, and secured','Closures open and close smoothly','Lining sits flat, no pulling','Thread ends trimmed throughout','Labels attached correctly','Piece pressed & steamed','Final overall visual pass'];
+
+function techPackHTML(job) {
+  const isBlank = !job;
+  const refNo = isBlank ? '—' : (job.id.slice(-6).toUpperCase());
+  const brand = isBlank ? '' : brandName(job.brand);
+  const piece = isBlank ? '' : (job.task || '');
+  const collection = isBlank ? '' : (job.collection || '');
+  const units = isBlank ? '' : (job.units || '');
+  const tailor = isBlank ? '' : (job.tailor || '');
+  const jobType = isBlank ? '' : typeLabel(job.type || 'custom');
+  const startDate = isBlank ? '' : fmtDateLong(job.start);
+  const promisedDate = isBlank ? '' : fmtDateLong(job.end);
+  const fabricMain = isBlank ? '' : (job.fabricMain || '');
+  const fabricLining = isBlank ? '' : (job.fabricLining || '');
+  const construction = isBlank ? '' : (job.construction || '');
+  const trims = isBlank ? '' : (job.trims || '');
+  const done = isBlank ? '' : (job.done || '');
+  const notes = isBlank ? '' : (job.notes || '');
+  const studioName = state.studio.name || 'The Studio';
+  const supervisor = state.studio.supervisor || '';
+  const supervisorRole = state.studio.supervisorRole || 'Studio Supervisor';
+  const issuedDate = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const val = (v) => v ? escapeHtml(v) : '<span style="color:#bbb;">__________</span>';
+
+  let html = `
+    <div class="techpack-page">
+      <div class="tp-header">
+        <div><div class="tp-studio-name">${escapeHtml(studioName)}</div><div class="tp-doc-type">Production Tech Pack · ${jobType || '___'}</div></div>
+        <div class="tp-header-right"><div class="tp-ref">Ref: ${refNo}</div><div>Issued: ${issuedDate}</div><div>Page 1 of 3</div></div>
+      </div>
+      <div class="tp-title-block">
+        <div><div class="tp-piece-name">${val(piece)}</div><div class="tp-brand">${val(brand)}</div></div>
+        <div class="tp-meta-col">
+          <div class="tp-meta-item"><div class="tp-meta-label">Type</div><div class="tp-meta-value">${val(jobType)}</div></div>
+          <div class="tp-meta-item"><div class="tp-meta-label">Collection</div><div class="tp-meta-value">${val(collection)}</div></div>
+          <div class="tp-meta-item"><div class="tp-meta-label">Units</div><div class="tp-meta-value">${val(units)}</div></div>
+        </div>
+      </div>
+      <div class="tp-assignment">
+        <div><div class="tp-meta-label">Assigned tailor</div><div class="tp-meta-value">${val(tailor)}</div></div>
+        <div><div class="tp-meta-label">Start date</div><div class="tp-meta-value">${val(startDate)}</div></div>
+        <div><div class="tp-meta-label">End date (promised)</div><div class="tp-meta-value">${val(promisedDate)}</div></div>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Fabric <span class="tp-section-num">§ 01</span></div>
+        <div class="tp-fabric-grid">
+          <div class="tp-swatch-box">Tape fabric<br>swatch here</div>
+          <div class="tp-fabric-details">
+            <div class="tp-fabric-row"><div class="tp-meta-label">Main fabric</div><div class="tp-write-line">${val(fabricMain)}</div></div>
+            <div class="tp-fabric-row"><div class="tp-meta-label">Lining</div><div class="tp-write-line">${val(fabricLining)}</div></div>
+            <div class="tp-fabric-row"><div class="tp-meta-label">Quantity (metres)</div><div class="tp-write-line"><span style="color:#bbb;">__________</span></div></div>
+            <div class="tp-fabric-row"><div class="tp-meta-label">Supplier</div><div class="tp-write-line"><span style="color:#bbb;">__________</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Sketch / Flat <span class="tp-section-num">§ 02</span></div>
+        <div class="tp-sketch-box"><div class="tp-sketch-placeholder">Sketch front &amp; back flats here</div></div>
+        <div class="tp-sketch-labels">Label: neckline · closures · seam placement · hem · unique details</div>
+      </div>
+      <div class="tp-footer"><span>${escapeHtml(studioName)}</span><span>${refNo} · Page 1 of 3</span></div>
+    </div>
+    <div class="techpack-page">
+      <div class="tp-header">
+        <div><div class="tp-studio-name">${escapeHtml(studioName)}</div><div class="tp-doc-type">Spec</div></div>
+        <div class="tp-header-right"><div class="tp-ref">Ref: ${refNo}</div><div>${escapeHtml(brand)} · ${escapeHtml(piece)}</div><div>Page 2 of 3</div></div>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Measurements <span class="tp-section-num">§ 03 · cm</span></div>
+        <table class="tp-measurements-table">
+          <thead><tr><th style="width:40%;">Point</th><th style="width:20%;">Spec</th><th style="width:20%;">As sewn</th><th style="width:20%;">Initials</th></tr></thead>
+          <tbody>${DEFAULT_MEASUREMENTS.map(([n]) => `<tr><td>${escapeHtml(n)}</td><td class="tp-blank"></td><td class="tp-blank"></td><td class="tp-blank"></td></tr>`).join('')}
+          <tr><td><em style="color:#888;">Other:</em></td><td class="tp-blank"></td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+          <tr><td><em style="color:#888;">Other:</em></td><td class="tp-blank"></td><td class="tp-blank"></td><td class="tp-blank"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Construction <span class="tp-section-num">§ 04</span></div>
+        ${construction ? `<div class="tp-notes-box tp-prefilled-notes">${escapeHtml(construction)}</div>` : `
+        <table class="tp-construction-table">
+          <thead><tr><th style="width:30%;">Detail</th><th>Specification</th></tr></thead>
+          <tbody>
+            <tr><td>Seam type</td><td class="tp-blank"></td></tr>
+            <tr><td>Seam allowance</td><td class="tp-blank"></td></tr>
+            <tr><td>Seam finish</td><td class="tp-blank"></td></tr>
+            <tr><td>Hem finish</td><td class="tp-blank"></td></tr>
+            <tr><td>Closure</td><td class="tp-blank"></td></tr>
+            <tr><td>Lining</td><td class="tp-blank"></td></tr>
+            <tr><td>Pressing</td><td class="tp-blank"></td></tr>
+          </tbody>
+        </table>`}
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Trims &amp; Notions <span class="tp-section-num">§ 05</span></div>
+        ${trims ? `<div class="tp-notes-box tp-prefilled-notes">${escapeHtml(trims)}</div>` : `
+        <table class="tp-trim-table">
+          <thead><tr><th style="width:30%;">Item</th><th style="width:20%;">Qty</th><th>Spec / Source</th></tr></thead>
+          <tbody>
+            <tr><td>Thread colour</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Buttons</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Zipper</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Interfacing</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Brand label</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Care label</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+            <tr><td>Other</td><td class="tp-blank"></td><td class="tp-blank"></td></tr>
+          </tbody>
+        </table>`}
+      </div>
+      <div class="tp-footer"><span>${escapeHtml(studioName)}</span><span>${refNo} · Page 2 of 3</span></div>
+    </div>
+    <div class="techpack-page">
+      <div class="tp-header">
+        <div><div class="tp-studio-name">${escapeHtml(studioName)}</div><div class="tp-doc-type">QC &amp; Sign-off</div></div>
+        <div class="tp-header-right"><div class="tp-ref">Ref: ${refNo}</div><div>${escapeHtml(brand)} · ${escapeHtml(piece)}</div><div>Page 3 of 3</div></div>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">"Done looks like…" <span class="tp-section-num">§ 06</span></div>
+        <div class="tp-notes-box ${done ? 'tp-prefilled-notes' : ''}">${done ? escapeHtml(done) : ''}</div>
+      </div>
+      <div class="tp-section">
+        <div class="tp-section-title">Quality checklist <span class="tp-section-num">§ 07</span></div>
+        <div class="tp-checklist">
+          <div class="tp-checklist-item" style="border-bottom: 1px solid #000; padding-bottom: 3mm; margin-bottom: 2mm;">
+            <div></div>
+            <div style="font-weight: 600; font-size: 8pt; letter-spacing: 0.1em; text-transform: uppercase;">Check</div>
+            <div style="font-weight: 600; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #666;">Tailor initials</div>
+            <div style="font-weight: 600; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #666;">Date</div>
+          </div>
+          ${DEFAULT_QUALITY_CHECKS.map(c => `
+            <div class="tp-checklist-item">
+              <div class="tp-check-box"></div>
+              <div>${escapeHtml(c)}</div>
+              <div style="border-bottom: 1px solid #999; height: 5mm;"></div>
+              <div style="border-bottom: 1px solid #999; height: 5mm;"></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="tp-signoff-block">
+        <div class="tp-signoff-title">Final sign-off</div>
+        <div class="tp-signoff-row">
+          <div class="tp-signoff-field">
+            <div class="tp-signoff-label">Tailor — confirms complete</div>
+            <div class="tp-signoff-line"></div>
+            <div class="tp-meta-label" style="margin-top: 2mm;">Name &amp; date</div>
+          </div>
+          <div class="tp-signoff-field">
+            <div class="tp-signoff-label">${escapeHtml(supervisorRole)} — confirms quality passed</div>
+            <div class="tp-signoff-line tp-signoff-name-preprinted">${escapeHtml(supervisor)}</div>
+            <div class="tp-meta-label" style="margin-top: 2mm;">Signature &amp; date</div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-section" style="margin-top: 6mm;">
+        <div class="tp-section-title">Change log <span class="tp-section-num">§ 08</span></div>
+        <table class="tp-changelog-table">
+          <thead><tr><th style="width:18%;">Date</th><th style="width:42%;">What changed</th><th style="width:20%;">Authorised by</th><th style="width:20%;">Initials</th></tr></thead>
+          <tbody>${Array.from({length:6}).map(() => `<tr><td class="tp-blank"></td><td class="tp-blank"></td><td class="tp-blank"></td><td class="tp-blank"></td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+      ${notes ? `<div class="tp-section"><div class="tp-section-title">Notes <span class="tp-section-num">§ 09</span></div><div class="tp-notes-box tp-prefilled-notes">${escapeHtml(notes)}</div></div>` : ''}
+      <div class="tp-footer"><span>${escapeHtml(studioName)}</span><span>${refNo} · Page 3 of 3 · END</span></div>
+    </div>
+  `;
+  return html;
+}
+
+function showTechPack(job) {
+  const preview = document.getElementById('techpack-preview');
+  preview.innerHTML = `
+    <div class="techpack-actions" style="margin-top: 24px;">
+      <button class="btn" onclick="window.print()">Print this tech pack</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('techpack-preview').innerHTML=''">Close preview</button>
+    </div>
+    <div class="techpack-preview-wrap">${techPackHTML(job)}</div>
+  `;
+  preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.getElementById('generate-blank-btn').addEventListener('click', () => showTechPack(null));
+document.getElementById('select-job-btn').addEventListener('click', () => {
+  const list = document.getElementById('job-picker-list');
+  const jobs = [...state.jobs].sort((a,b) => {
+    const order = {'ui':0,'i':1,'u':2,'n':3};
+    const ap = order[a.priority]??4; const bp = order[b.priority]??4;
+    if (ap !== bp) return ap - bp;
+    return (a.end||a.start||'').localeCompare(b.end||b.start||'');
+  });
+  list.innerHTML = jobs.map(j => `
+    <div class="job-card" style="margin-bottom: 6px;" data-job="${j.id}">
+      <span class="type-tag ${j.type||'custom'}">${typeLabel(j.type||'custom')}</span>
+      <div class="job-brand">${escapeHtml(brandName(j.brand))}</div>
+      <div class="job-task">${escapeHtml(j.task||'—')}</div>
+      <div class="job-meta-row"><span class="job-tailor">${escapeHtml(j.tailor||'Unassigned')}</span><span>${escapeHtml(statusLabel(j.status))}</span></div>
+    </div>
+  `).join('');
+  list.querySelectorAll('[data-job]').forEach(el => {
+    el.addEventListener('click', () => {
+      const j = state.jobs.find(x => x.id === el.dataset.job);
+      closeModal('job-picker-modal');
+      showTechPack(j);
+    });
+  });
+  document.getElementById('job-picker-modal').classList.add('open');
+});
+
+// ============================================================
+// JOB MODAL
+// ============================================================
+let editingJobId = null;
+
+function openJobModal(id) {
+  editingJobId = id || null;
+  const delBtn = document.getElementById('job-delete-btn');
+  const tpBtn = document.getElementById('job-techpack-btn');
+  document.getElementById('job-brand').innerHTML = state.brands.map(b => `<option value="${b.id}">${escapeHtml(b.name)}</option>`).join('');
+  document.getElementById('job-tailor').innerHTML = '<option value="">Unassigned</option>' + state.tailors.map(t => `<option>${escapeHtml(t)}</option>`).join('');
+
+  if (id) {
+    const j = state.jobs.find(x => x.id === id);
+    if (!j) return;
+    document.getElementById('job-modal-title').textContent = 'Edit job';
+    document.getElementById('job-modal-sub').textContent = brandName(j.brand);
+    document.getElementById('job-brand').value = j.brand;
+    document.getElementById('job-type').value = j.type || 'custom';
+    document.getElementById('job-collection').value = j.collection || '';
+    document.getElementById('job-task').value = j.task || '';
+    document.getElementById('job-status').value = j.status;
+    document.getElementById('job-tailor').value = j.tailor || '';
+    document.getElementById('job-units').value = j.units || '';
+    document.getElementById('job-start').value = j.start || '';
+    document.getElementById('job-end').value = j.end || '';
+    document.getElementById('job-realistic').value = j.realistic || '';
+    document.getElementById('job-priority').value = j.priority || 'i';
+    document.getElementById('job-notes').value = j.notes || '';
+    document.getElementById('job-fabric-main').value = j.fabricMain || '';
+    document.getElementById('job-fabric-lining').value = j.fabricLining || '';
+    document.getElementById('job-construction').value = j.construction || '';
+    document.getElementById('job-trims').value = j.trims || '';
+    document.getElementById('job-done').value = j.done || '';
+    delBtn.classList.remove('hidden');
+    tpBtn.classList.remove('hidden');
+  } else {
+    document.getElementById('job-modal-title').textContent = 'New job';
+    document.getElementById('job-modal-sub').textContent = 'Enter a piece into the ledger';
+    ['job-collection','job-task','job-units','job-start','job-end','job-realistic','job-notes','job-fabric-main','job-fabric-lining','job-construction','job-trims','job-done'].forEach(f => document.getElementById(f).value = '');
+    document.getElementById('job-type').value = 'custom';
+    document.getElementById('job-status').value = 'not-complete';
+    document.getElementById('job-tailor').value = '';
+    document.getElementById('job-priority').value = 'i';
+    delBtn.classList.add('hidden');
+    tpBtn.classList.add('hidden');
+  }
+  updateGapWarning();
+  document.getElementById('job-modal').classList.add('open');
+}
+
+function updateGapWarning() {
+  const p = document.getElementById('job-end').value;
+  const r = document.getElementById('job-realistic').value;
+  const w = document.getElementById('gap-warning');
+  if (p && r) {
+    const gap = Math.round((new Date(r+'T00:00:00') - new Date(p+'T00:00:00'))/86400000);
+    if (gap > 0) { w.innerHTML = `Your realistic finish is <strong>${gap} day${gap===1?'':'s'} after</strong> what's promised. Renegotiate now if you can.`; w.classList.remove('hidden'); }
+    else if (gap < 0) { w.innerHTML = `You've built in a ${Math.abs(gap)}-day buffer. Good.`; w.classList.remove('hidden'); }
+    else w.classList.add('hidden');
+  } else w.classList.add('hidden');
+}
+
+document.getElementById('job-end').addEventListener('change', updateGapWarning);
+document.getElementById('job-realistic').addEventListener('change', updateGapWarning);
+
+document.getElementById('job-save-btn').addEventListener('click', () => {
+  const brand = document.getElementById('job-brand').value;
+  if (!brand) { alert('Pick a brand.'); return; }
+  const data = {
+    brand,
+    type: document.getElementById('job-type').value,
+    collection: document.getElementById('job-collection').value.trim(),
+    task: document.getElementById('job-task').value.trim(),
+    status: document.getElementById('job-status').value,
+    tailor: document.getElementById('job-tailor').value,
+    units: document.getElementById('job-units').value.trim(),
+    start: document.getElementById('job-start').value,
+    end: document.getElementById('job-end').value,
+    realistic: document.getElementById('job-realistic').value,
+    priority: document.getElementById('job-priority').value,
+    notes: document.getElementById('job-notes').value.trim(),
+    fabricMain: document.getElementById('job-fabric-main').value.trim(),
+    fabricLining: document.getElementById('job-fabric-lining').value.trim(),
+    construction: document.getElementById('job-construction').value.trim(),
+    trims: document.getElementById('job-trims').value.trim(),
+    done: document.getElementById('job-done').value.trim(),
+  };
+  if (editingJobId) {
+    Object.assign(state.jobs.find(x => x.id === editingJobId), data);
+  } else {
+    state.jobs.push({ id: uid(), createdAt: new Date().toISOString(), ...data });
+  }
+  saveState(); renderAll(); closeModal('job-modal');
+});
+
+document.getElementById('job-delete-btn').addEventListener('click', () => {
+  if (!editingJobId || !confirm('Delete this job?')) return;
+  state.jobs = state.jobs.filter(j => j.id !== editingJobId);
+  saveState(); renderAll(); closeModal('job-modal');
+});
+
+document.getElementById('job-techpack-btn').addEventListener('click', () => {
+  if (!editingJobId) return;
+  const j = state.jobs.find(x => x.id === editingJobId);
+  closeModal('job-modal');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelector('[data-view="techpacks"]').classList.add('active');
+  document.getElementById('view-techpacks').classList.add('active');
+  document.getElementById('filters-bar').style.display = 'none';
+  showTechPack(j);
+});
+
+function updateJob(id, patch) {
+  const j = state.jobs.find(x => x.id === id);
+  if (!j) return;
+  Object.assign(j, patch);
+  saveState();
+  renderMasthead(); renderToday(); renderBoard(); renderArchive();
+}
+
+// ============================================================
+// BRAND MODAL
+// ============================================================
+document.getElementById('add-brand-btn').addEventListener('click', () => {
+  document.getElementById('brand-name').value = '';
+  document.getElementById('brand-notes').value = '';
+  document.getElementById('brand-modal').classList.add('open');
+});
+
+document.getElementById('brand-save-btn').addEventListener('click', () => {
+  const name = document.getElementById('brand-name').value.trim();
+  if (!name) { alert('Name required.'); return; }
+  state.brands.push({ id: buid(), name, notes: document.getElementById('brand-notes').value.trim() });
+  saveState(); renderAll(); closeModal('brand-modal');
+});
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-backdrop').forEach(b => {
+  b.addEventListener('click', e => { if (e.target === b) b.classList.remove('open'); });
+});
+
+// ============================================================
+// NAV
+// ============================================================
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+    const filtersBar = document.getElementById('filters-bar');
+    if (['techpacks','settings','attendance'].includes(btn.dataset.view)) {
+      filtersBar.style.display = 'none';
+    } else {
+      filtersBar.style.display = '';
+    }
+    renderAll();
+  });
+});
+
+document.getElementById('add-job-btn').addEventListener('click', () => openJobModal(null));
+
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  if (!confirm('Wipe all data?')) return;
+  if (!confirm('Really sure?')) return;
+  state = {
+    brands: SEED_BRANDS, tailors: ['Rafat','Razak','Moyo','Opeye','New Tailor'], staff: SEED_STAFF,
+    jobs: SEED_JOBS, attendance: SEED_ATTENDANCE,
+    filters: { tailor:'', brand:'', type:'', month:'' },
+    studio: { name: 'NexCycle · BY.WURA', supervisor: 'Rafat', supervisorRole: 'Studio Supervisor', scheduledStart: '09:00', scheduledEnd: '16:30' },
+    attendanceView: { mode: 'daily', date: '', month: '' },
+  };
+  await saveState(); renderAll();
+});
+
+function setGreeting() {
+  const h = new Date().getHours();
+  let g = 'Good morning';
+  if (h >= 12 && h < 17) g = 'Good afternoon';
+  else if (h >= 17) g = 'Good evening';
+  document.getElementById('checkin-greeting').textContent = `${g}. Walk through each active job and update where you are.`;
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+function renderAll() {
+  renderMasthead(); renderFilters(); renderToday(); renderBoard();
+  renderCheckin(); renderArchive(); renderSettings(); renderAttendance(); setGreeting();
+}
+
+(async () => {
+  await loadState();
+  renderAll();
+})();
+</script>
+</body>
+</html>
